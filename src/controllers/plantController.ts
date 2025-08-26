@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { Plant, STARTER_PLANTS } from '../models/plant';
 import { Filters } from '../models/filters';
+import db from '../database/dbConnection';
 
 function filterPlant(plant: Plant, filters: Filters): boolean {
     if (filters.q) {
@@ -47,8 +48,34 @@ function filterPlant(plant: Plant, filters: Filters): boolean {
     }
 }; */
 
+const getItems = async (req: Request, res: Response, next: NextFunction) => {
+    const plants = await db.plants.findMany({
+        take: 100,
+        skip: 0,
+        select: {
+            id: true,
+            code: true,
+            latin: true,
+            name: true,
+            type: true,
+            zone: true,
+            isNative: true,
+            droughtTolerant: true,
+            floodTolerant: true,
+            height: true,
+            spread: true,
+            saltTolerance: true,
+        },
+        where: {
+            isNative: 0,
+        },
+    });
+    console.log(plants);
+    res.send('ok');
+};
+
 // Read all items
-const getItems = (req: Request, res: Response, next: NextFunction) => {
+const getItems2 = (req: Request, res: Response, next: NextFunction) => {
     try {
         const filters: Filters = {
             q: req.query.q ? String(req.query.q) : '',

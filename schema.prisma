@@ -1,0 +1,27 @@
+generator client {
+  provider               = "prisma-client"
+  output                 = "./src/database/prisma-client"
+  previewFeatures        = ["driverAdapters"]
+  generatedFileExtension = "ts"
+  importFileExtension    = "ts"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./database/dev.db"
+}
+
+model plants {
+  id              Int     @id @default(autoincrement())
+  code            String  @unique(map: "sqlite_autoindex_plants_1")
+  latin           String
+  name            String
+  type            String?
+  zone            Int?
+  isNative        Int?
+  droughtTolerant Int?
+  floodTolerant   Int?
+  height          Int?
+  spread          Int?
+  saltTolerance   String?
+}
