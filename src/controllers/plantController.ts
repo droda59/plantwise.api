@@ -3,7 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { Plant, STARTER_PLANTS } from '../models/plant';
 import { Filters } from '../models/filters';
 import db from '../database/dbConnection';
+import { plantsWhereInput } from '../database/prisma-client/models';
+import { getZoneFilter } from '../helpers/hardinessZoneHelpers';
 
+/*
 function filterPlant(plant: Plant, filters: Filters): boolean {
     if (filters.q) {
         const q = filters.q.toLowerCase();
@@ -35,6 +38,7 @@ function filterPlant(plant: Plant, filters: Filters): boolean {
 
     return true;
 }
+*/
 
 // Create an item
 /* const createItem = (req: Request, res: Response, next: NextFunction) => {
@@ -49,32 +53,88 @@ function filterPlant(plant: Plant, filters: Filters): boolean {
 }; */
 
 const getItems = async (req: Request, res: Response, next: NextFunction) => {
-    const plants = await db.plants.findMany({
-        take: 100,
-        skip: 0,
-        select: {
-            id: true,
-            code: true,
-            latin: true,
-            name: true,
-            type: true,
-            zone: true,
-            isNative: true,
-            droughtTolerant: true,
-            floodTolerant: true,
-            height: true,
-            spread: true,
-            saltTolerance: true,
-        },
-        where: {
-            isNative: 0,
-        },
-    });
-    console.log(plants);
-    res.send('ok');
+    try {
+        /*
+        const filters: Filters = {
+            q: req.query.q ? String(req.query.q) : '',
+
+            // Conditions du site
+            zone: req.query.zone ? String(req.query.zone) : undefined,
+            soil: req.query.soil ? String(req.query.soil) as Filters['soil'] : undefined,
+            sun: req.query.sun ? String(req.query.sun) as Filters['sun'] : undefined,
+            saltConditions: req.query.saltConditions ? String(req.query.saltConditions) as Filters['saltConditions'] : undefined,
+            droughtTolerant: req.query.droughtTolerant === 'true' ? true : undefined,
+            floodTolerant: req.query.floodTolerant === 'true' ? true : undefined,
+
+            // Conditions de la plante
+            type: req.query.type ? String(req.query.type) : undefined,
+            color: req.query.color ? String(req.query.color) : undefined,
+            bloom: req.query.bloom ? String(req.query.bloom) : undefined,
+            native: req.query.native === 'true' ? true : undefined,
+            heightMin: req.query.heightMin ? parseInt(req.query.heightMin as string, 10) : undefined,
+            heightMax: req.query.heightMax ? parseInt(req.query.heightMax as string, 10) : undefined,
+            spreadMin: req.query.spreadMin ? parseInt(req.query.spreadMin as string, 10) : undefined,
+            spreadMax: req.query.spreadMax ? parseInt(req.query.spreadMax as string, 10) : undefined,
+        };
+        */
+
+        const conditions: plantsWhereInput = {};
+        if (req.query.q) {
+            const searchQuery = String(req.query.q).toLowerCase();
+            conditions.latin = { contains: searchQuery };
+            conditions.name = { contains: searchQuery };
+        }
+        if (req.query.type) conditions.type = String(req.query.type);
+        if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) }; //String(req.query.zone);
+        if (req.query.native) conditions.isNative = true;
+        if (req.query.droughtTolerant) conditions.droughtTolerant = true;
+        if (req.query.floodTolerant) conditions.floodTolerant = true;
+
+        if (req.query.heightMin && req.query.heightMax) conditions.height = {
+            gte: (parseInt(req.query.heightMin as string, 10) / 100),
+            lte: (parseInt(req.query.heightMax as string, 10) / 100),
+        };
+
+        if (req.query.spreadMin && req.query.spreadMax) conditions.spread = {
+            gte: (parseInt(req.query.spreadMin as string, 10) / 100),
+            lte: (parseInt(req.query.spreadMax as string, 10) / 100),
+        };
+
+        if (req.query.floodTolerant) conditions.floodTolerant = true;
+        // if (req.query.saltConditions) conditions.saltTolerance = String(req.query.saltConditions) as Filters['saltConditions'];
+
+        console.log('Conditions:', conditions);
+
+        const filteredPlants = await db.plants.findMany({
+            take: 100,
+            skip: 0,
+            select: {
+                id: true,
+                code: true,
+                latin: true,
+                name: true,
+                type: true,
+                zone: true,
+                isNative: true,
+                droughtTolerant: true,
+                floodTolerant: true,
+                height: true,
+                spread: true,
+                saltTolerance: true,
+            },
+            where: conditions,
+        });
+
+        console.log(filteredPlants);
+        res.json(filteredPlants);
+        // res.send('ok');
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Read all items
+/* 
 const getItems2 = (req: Request, res: Response, next: NextFunction) => {
     try {
         const filters: Filters = {
@@ -107,6 +167,7 @@ const getItems2 = (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 };
+*/
 
 // Read single item
 const getItemById = (req: Request, res: Response, next: NextFunction) => {

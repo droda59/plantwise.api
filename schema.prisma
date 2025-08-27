@@ -17,11 +17,11 @@ model plants {
   latin           String
   name            String
   type            String?
-  zone            Int?
-  isNative        Int?
-  droughtTolerant Int?
-  floodTolerant   Int?
-  height          Int?
-  spread          Int?
+  zone            String?
+  isNative        Boolean?
+  droughtTolerant Boolean?
+  floodTolerant   Boolean?
+  height          Float?
+  spread          Float?
   saltTolerance   String?
 }

@@ -2,7 +2,7 @@ export interface Filters {
     q: string;
 
     // Conditions du site
-    zone?: number;
+    zone?: string;
     soil?: 'sableux' | 'limoneux' | 'argileux' | 'riche' | 'pauvre' | 'acide' | 'alcalin';
     sun?: 'plein-soleil' | 'mi-ombre' | 'ombre';
     saltConditions?: 'haute' | 'moyenne' | 'faible';
