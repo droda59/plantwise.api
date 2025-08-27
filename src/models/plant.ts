@@ -8,13 +8,13 @@ export interface CSVPlant {
     ctocDistance: string;
     comment: string;
     zone: string; // hardiness zone (e.g., 3)
-    sunFull: string; // "oui" or "non"
-    sunFullPartial: string; // "oui" or "non"
-    sunPartial: string; // "oui" or "non"
-    sunShade: string; // "oui" or "non"
-    humidity1: string; // "oui" or "non"
-    humidity2: string; // "oui" or "non"
-    humidity3: string; // "oui" or "non"
+    sunFull: string; // 'oui' or 'non'
+    sunFullPartial: string; // 'oui' or 'non'
+    sunPartial: string; // 'oui' or 'non'
+    sunShade: string; // 'oui' or 'non'
+    humidity1: string; // 'oui' or 'non'
+    humidity2: string; // 'oui' or 'non'
+    humidity3: string; // 'oui' or 'non'
     soil: string;
     ph: string;
     height: number; // cm (approx)
@@ -25,25 +25,25 @@ export interface CSVPlant {
 }
 
 export interface Plant {
-    id: string;
+    id?: number;
     code: string;
     latin: string;
     name: string;
     type: PlantType;
-    zone: number;
-    soil: Array<"sableux" | "limoneux" | "argileux" | "riche" | "pauvre" | "acide" | "alcalin">;
-    sun: Array<"plein-soleil" | "mi-ombre" | "ombre">;
+    zone?: string;
+    soil: Array<'sablonneux' | 'limoneux' | 'argileux' | 'riche' | 'pauvre' | 'acide' | 'alcalin' | 'organique' | 'tourbeux' | 'loam argileux' | 'loam sablonneux' | 'humifère' | 'graveleux'>;
+    sun: Array<'plein-soleil' | 'mi-ombre' | 'ombre'>;
     isNative: boolean;
     droughtTolerant?: boolean;
     floodTolerant?: boolean;
-    height: number; // m (approx)
-    spread: number; // m (approx)
-    saltTolerance?: "haute" | "moyenne" | "faible";
+    height?: number; // m (approx)
+    spread?: number; // m (approx)
+    saltTolerance?: 'haute' | 'moyenne' | 'faible';
     // nurseries: Nursery[];
 }
 
-type PlantTypeValue = "1 AR" | "1b ARB" | "2 CON" | "3 ARBU" | "4 VIV" | "5 GRAM" | "6 GRMP" | "7 FOU" | "8 AQUA" | "9 ANU" | "10 FH" | "11 ENS" | "12 BUL" | "13 MOU";
-type PlantTypeLabel = "Arbre" | "Arbrisseau feuillu" | "Conifère" | "Arbuste" | "Vivace" | "Graminée" | "Grimpante" | "Fougère" | "Aquatique" | "Annuelle" | "Fines herbes" | "Ensemencement" | "Bulbe" | "Mousse";
+type PlantTypeValue = '1 AR' | '1b ARB' | '2 CON' | '3 ARBU' | '4 VIV' | '5 GRAM' | '6 GRMP' | '7 FOU' | '8 AQUA' | '9 ANU' | '10 FH' | '11 ENS' | '12 BUL' | '13 MOU';
+type PlantTypeLabel = 'Arbre' | 'Arbrisseau feuillu' | 'Conifère' | 'Arbuste' | 'Vivace' | 'Graminée' | 'Grimpante' | 'Fougère' | 'Aquatique' | 'Annuelle' | 'Fines herbes' | 'Ensemencement' | 'Bulbe' | 'Mousse';
 
 export interface PlantType {
     value: PlantTypeValue,
@@ -75,7 +75,7 @@ export const STARTER_PLANTS: Plant[] = [
             label: 'Vivace'
         },
         zone: 3,
-        soil: ['sableux', 'pauvre', 'acide'],
+        soil: ['sablonneux', 'pauvre', 'acide'],
         sun: ['plein-soleil'],
         // colors: ['orange'],
         // bloom: ['été'],
@@ -116,7 +116,7 @@ export const STARTER_PLANTS: Plant[] = [
             label: 'Fines herbes'
         },
         zone: 2,
-        soil: ['acide', 'sableux'],
+        soil: ['acide', 'sablonneux'],
         sun: ['plein-soleil', 'mi-ombre'],
         // colors: ['blanc'],
         // bloom: ['printemps'],
@@ -157,7 +157,7 @@ export const STARTER_PLANTS: Plant[] = [
             label: 'Fines herbes'
         },
         zone: 2,
-        soil: ['pauvre', 'sableux'],
+        soil: ['pauvre', 'sablonneux'],
         sun: ['plein-soleil'],
         // colors: ['mauve', 'rose'],
         // bloom: ['été'],

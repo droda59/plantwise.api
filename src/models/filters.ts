@@ -3,7 +3,7 @@ export interface Filters {
 
     // Conditions du site
     zone?: string;
-    soil?: 'sableux' | 'limoneux' | 'argileux' | 'riche' | 'pauvre' | 'acide' | 'alcalin';
+    soil?: 'sablonneux' | 'limoneux' | 'argileux' | 'riche' | 'pauvre' | 'acide' | 'alcalin' | 'organique' | 'tourbeux' | 'loam argileux' | 'loam sablonneux' | 'humifère' | 'graveleux';
     sun?: 'plein-soleil' | 'mi-ombre' | 'ombre';
     saltConditions?: 'haute' | 'moyenne' | 'faible';
     droughtTolerant?: boolean;
