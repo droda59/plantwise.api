@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import fs from 'fs';
+import path from 'path';
 import { parse } from 'csv-parse';
 
 import { CSVPlant, Plant, STARTER_PLANTS } from '../models/plant';
@@ -44,16 +45,14 @@ function filterPlant(plant: Plant, filters: Filters): boolean {
 // Create an item
 const createItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
-
         const sanitizePlants = (rows: CSVPlant[]) => {
             // Attendu: colonnes similaires à exportRows ci-dessus. Les champs non conformes seront ignorés.
             const toPlant = (r: any) => {
                 const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
-                const code = cleanup(r['CODE']);
                 const isNative = !!r['indig/nat'];
                 // const arr = (x) => typeof x === 'string' ? x.split('|').map(s => s.trim()).filter(Boolean) : [];
                 const p: Plant = {
-                    code: code,
+                    code: cleanup(r['CODE']),
                     name: cleanup(r['Nom commun']) || '',
                     latin: cleanup(r['Nom BOTANIQUE']) || '',
                     type: cleanup(r['Type']) || '',
@@ -62,9 +61,9 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     sun: [], // (arr(r.soleil)),
                     // colors: arr(r.couleurs),
                     // bloom: (arr(r.floraison)),
-                    isNative: isNative,
-                    height: cleanup(r['H']) || undefined, //Number(r.height),
-                    spread: cleanup(r['L']) || undefined,
+                    isNative,
+                    height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
+                    spread: Number(cleanup(r['L'])) || undefined,
                     // nurseries: NURSERIES.slice(0, 1),
                 };
                 return p;
@@ -77,9 +76,12 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             return new Promise((resolve, reject) => {
                 const processFile = async () => {
                     const records = [];
-                    const parser = fs.createReadStream(file).pipe(
+                    const filePath = path.join(__dirname, file);
+                    const parser = fs.createReadStream(filePath, 'utf8').pipe(
                         parse({
-                            // CSV options if any
+                            columns: true,
+                            skip_records_with_empty_values: true,
+                            bom: true,
                         }),
                     );
                     for await (const record of parser) {
@@ -91,46 +93,13 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
                 (async () => {
                     const records = await processFile();
-                    console.info(records);
+                    resolve(records);
                 })();
-
-
-
-                /*  const reader = new FileReader();
-                 reader.onload = () => {
-                     try {
-                         const text = (reader.result);
-                         const rows = parse(
-                             text,
-                             {
-                                 skip_records_with_empty_values: true,
-                             }
-                         );
-                         const [headerLine, ...lines] = text.trim().split(/\r?\n/);
-                         const headers = headerLine.split(",").map(h => h.replace(/^"|"$/g, ""));
-                         const rows = lines.map(l => {
-                             // very simple CSV, assumes no embedded commas except within quotes
-                             // const cols = l.match(/((?:\"[^\"]*\")|[^,])+/g)?.map(x => x.replace(/^"|"$/g, "").replaceAll("\\\"", "\"")) || [];
-                             const o = {};
-                             const data = l.split(',');
-                             if (data.length == headers.length) {
-                                 headers.forEach((h, i) => o[h] = data[i]);
-                             }
-                             //                     headers.forEach((h, i) => o[h] = l[i]);
-                             return o;
-                         });
-         
-                         resolve(rows.slice(0, 500));
-                     } catch (e) { reject(e); }
-                 };
-                 reader.onerror = reject;
-                 reader.readAsText(file); */
             });
         }
 
-        const fileData = await readCSV('../data/Plantation - liste globale.csv');
+        const fileData = await readCSV('../data/Plantation - liste globale short.csv');
         const newRows = sanitizePlants(fileData as CSVPlant[]);
-        console.log(newRows.length);
 
         const rows = newRows.map(p => ({
             code: p.code,
@@ -158,30 +127,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
 const getItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        /*
-        const filters: Filters = {
-            q: req.query.q ? String(req.query.q) : '',
-
-            // Conditions du site
-            zone: req.query.zone ? String(req.query.zone) : undefined,
-            soil: req.query.soil ? String(req.query.soil) as Filters['soil'] : undefined,
-            sun: req.query.sun ? String(req.query.sun) as Filters['sun'] : undefined,
-            saltConditions: req.query.saltConditions ? String(req.query.saltConditions) as Filters['saltConditions'] : undefined,
-            droughtTolerant: req.query.droughtTolerant === 'true' ? true : undefined,
-            floodTolerant: req.query.floodTolerant === 'true' ? true : undefined,
-
-            // Conditions de la plante
-            type: req.query.type ? String(req.query.type) : undefined,
-            color: req.query.color ? String(req.query.color) : undefined,
-            bloom: req.query.bloom ? String(req.query.bloom) : undefined,
-            native: req.query.native === 'true' ? true : undefined,
-            heightMin: req.query.heightMin ? parseInt(req.query.heightMin as string, 10) : undefined,
-            heightMax: req.query.heightMax ? parseInt(req.query.heightMax as string, 10) : undefined,
-            spreadMin: req.query.spreadMin ? parseInt(req.query.spreadMin as string, 10) : undefined,
-            spreadMax: req.query.spreadMax ? parseInt(req.query.spreadMax as string, 10) : undefined,
-        };
-        */
-
         const conditions: plantsWhereInput = {};
         if (req.query.q) {
             const searchQuery = String(req.query.q).toLowerCase();
@@ -207,7 +152,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.floodTolerant) conditions.floodTolerant = true;
         // if (req.query.saltConditions) conditions.saltTolerance = String(req.query.saltConditions) as Filters['saltConditions'];
 
-        console.log('Conditions:', conditions);
 
         const filteredPlants = await db.plants.findMany({
             take: 100,
@@ -229,7 +173,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             where: conditions,
         });
 
-        console.log(filteredPlants);
         res.json(filteredPlants);
         // res.send('ok');
     } catch (error) {

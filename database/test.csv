@@ -1,0 +1,6 @@
+id,code,latin,name,type,zone,isNative,droughtTolerant,floodTolerant,height,spread,saltTolerance
+1,ASC,Asclepias tuberosa,Asclépiade tubéreuse,4 VIV,3,1,1,,0.6,0.45,moyenne
+2,ACG,Acer ginnala,Érable de l'Amour,1 AR,3,0,1,,6.0,5.0,
+3,VAA,Vaccinium angustifolium,Bleuet sauvage,10 FH,2,1,,1,0.3,1.0,haute
+4,HYP,Hydrangea paniculata,Hydrangée paniculée,3 ARBU,3,0,,,2.0,2.0,faible
+5,THY,Thymus serpyllum,Thym serpolet,10 FH,2,0,,,0.1,0.5,
