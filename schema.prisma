@@ -24,4 +24,8 @@ model plants {
   height          Float?
   spread          Float?
   saltTolerance   String?
+  family          String?
+  genus           String?
+  species         String?
+  functionalGroup String?
 }

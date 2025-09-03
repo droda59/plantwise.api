@@ -22,6 +22,10 @@ export interface CSVPlant {
     floweringMonths: string;
     native: boolean;
     dangers: string;
+    family: string;
+    genus: string;
+    species: string;
+    functionalGroup: string;
 }
 
 export interface Plant {
@@ -39,6 +43,10 @@ export interface Plant {
     height?: number; // m (approx)
     spread?: number; // m (approx)
     saltTolerance?: 'haute' | 'moyenne' | 'faible';
+    family?: string;
+    genus?: string;
+    species?: string;
+    functionalGroup?: string;
     // nurseries: Nursery[];
 }
 

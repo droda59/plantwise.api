@@ -64,6 +64,10 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     isNative,
                     height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
                     spread: Number(cleanup(r['L'])) || undefined,
+                    family: cleanup(r['Famille']),
+                    genus: cleanup(r['Genre']),
+                    species: cleanup(r['Espèce']),
+                    functionalGroup: cleanup(r['Groupe fonctionnel']),
                     // nurseries: NURSERIES.slice(0, 1),
                 };
                 return p;
@@ -113,6 +117,10 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             height: p.height,
             spread: p.spread,
             saltTolerance: p.saltTolerance,
+            family: p.family,
+            genus: p.genus,
+            species: p.species,
+            functionalGroup: p.functionalGroup,
         }));
         const filteredPlants = await db.plants.createMany({
             data: rows,
@@ -152,7 +160,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.floodTolerant) conditions.floodTolerant = true;
         // if (req.query.saltConditions) conditions.saltTolerance = String(req.query.saltConditions) as Filters['saltConditions'];
 
-
         const filteredPlants = await db.plants.findMany({
             take: 100,
             skip: 0,
@@ -169,6 +176,10 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 height: true,
                 spread: true,
                 saltTolerance: true,
+                family: true,
+                genus: true,
+                species: true,
+                functionalGroup: true,
             },
             where: conditions,
         });
@@ -197,6 +208,10 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
                 height: true,
                 spread: true,
                 saltTolerance: true,
+                family: true,
+                genus: true,
+                species: true,
+                functionalGroup: true,
             },
             where: { code: req.params.id as string },
         });
