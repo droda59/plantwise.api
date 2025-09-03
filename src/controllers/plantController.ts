@@ -181,7 +181,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // Read single item
-const getItemById = async (req: Request, res: Response, next: NextFunction) => {
+const getItemByCode = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const foundPlant = await db.plants.findUniqueOrThrow({
             select: {
@@ -198,12 +198,11 @@ const getItemById = async (req: Request, res: Response, next: NextFunction) => {
                 spread: true,
                 saltTolerance: true,
             },
-            where: { id: parseInt(req.query.id as string, 10) },
+            where: { code: req.params.id as string },
         });
 
-        console.log(foundPlant);
+        console.log('Found ', foundPlant);
         res.json(foundPlant);
-        // res.send('ok');
     } catch (error) {
         next(error);
     }
@@ -247,7 +246,7 @@ const deleteItem = (req: Request, res: Response, next: NextFunction) => {
 export {
     createItems,
     getItems,
-    getItemById,
+    getItemByCode,
     // updateItem,
     // deleteItem,
 };
