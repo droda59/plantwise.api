@@ -158,6 +158,8 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         };
 
         if (req.query.floodTolerant) conditions.floodTolerant = true;
+
+        if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
         // if (req.query.saltConditions) conditions.saltTolerance = String(req.query.saltConditions) as Filters['saltConditions'];
 
         const filteredPlants = await db.plants.findMany({
@@ -182,6 +184,9 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 functionalGroup: true,
             },
             where: conditions,
+            orderBy: {
+                latin: 'asc'
+            }
         });
 
         res.json(filteredPlants);
