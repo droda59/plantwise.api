@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse';
 
-import { CSVPlant, Plant, STARTER_PLANTS } from '../models/plant';
+import { CSVPlant, Plant } from '../models/plant';
 import db from '../database/dbConnection';
 import { plantsWhereInput } from '../database/prisma-client/models';
 import { getZoneFilter } from '../helpers/hardinessZoneHelpers';
@@ -49,8 +49,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             // Attendu: colonnes similaires à exportRows ci-dessus. Les champs non conformes seront ignorés.
             const toPlant = (r: any) => {
                 const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
-                const isNative = !!r['indig/nat'];
-                // const arr = (x) => typeof x === 'string' ? x.split('|').map(s => s.trim()).filter(Boolean) : [];
                 const p: Plant = {
                     code: cleanup(r['CODE']),
                     name: cleanup(r['Nom commun']) || '',
@@ -61,7 +59,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     sun: [], // (arr(r.soleil)),
                     // colors: arr(r.couleurs),
                     // bloom: (arr(r.floraison)),
-                    isNative,
+                    native: cleanup(r['indig/nat']),
                     height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
                     spread: Number(cleanup(r['L'])) || undefined,
                     family: cleanup(r['Famille']),
@@ -111,7 +109,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             name: p.name,
             type: p.type.toString(),
             zone: p.zone,
-            isNative: p.isNative,
+            native: p.native,
             droughtTolerant: p.droughtTolerant,
             floodTolerant: p.floodTolerant,
             height: p.height,
@@ -143,7 +141,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         }
         if (req.query.type) conditions.type = String(req.query.type);
         if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) }; //String(req.query.zone);
-        if (req.query.native) conditions.isNative = true;
+        if (req.query.native) conditions.native = 'i';
         if (req.query.droughtTolerant) conditions.droughtTolerant = true;
         if (req.query.floodTolerant) conditions.floodTolerant = true;
 
@@ -172,7 +170,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 name: true,
                 type: true,
                 zone: true,
-                isNative: true,
+                native: true,
                 droughtTolerant: true,
                 floodTolerant: true,
                 height: true,
@@ -207,7 +205,7 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
                 name: true,
                 type: true,
                 zone: true,
-                isNative: true,
+                native: true,
                 droughtTolerant: true,
                 floodTolerant: true,
                 height: true,

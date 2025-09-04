@@ -20,7 +20,7 @@ export interface CSVPlant {
     height: number; // cm (approx)
     spread: number; // cm (approx)
     floweringMonths: string;
-    native: boolean;
+    native: string;
     dangers: string;
     family: string;
     genus: string;
@@ -37,7 +37,7 @@ export interface Plant {
     zone?: string;
     soil: Array<'sablonneux' | 'limoneux' | 'argileux' | 'riche' | 'pauvre' | 'acide' | 'alcalin' | 'organique' | 'tourbeux' | 'loam argileux' | 'loam sablonneux' | 'humifère' | 'graveleux'>;
     sun: Array<'plein-soleil' | 'mi-ombre' | 'ombre'>;
-    isNative: boolean;
+    native?: string;
     droughtTolerant?: boolean;
     floodTolerant?: boolean;
     height?: number; // m (approx)
@@ -72,106 +72,3 @@ const NURSERIES = [
     { name: 'Jardin Botanix Rive-Nord', city: 'Laval', website: 'https://exemple-botanix.qc' },
 ];
 
-export const STARTER_PLANTS: Plant[] = [
-    {
-        id: 'ASC',
-        code: 'ASC',
-        latin: 'Asclepias tuberosa',
-        name: 'Asclépiade tubéreuse',
-        type: {
-            value: '4 VIV',
-            label: 'Vivace'
-        },
-        zone: 3,
-        soil: ['sablonneux', 'pauvre', 'acide'],
-        sun: ['plein-soleil'],
-        // colors: ['orange'],
-        // bloom: ['été'],
-        isNative: true,
-        droughtTolerant: true,
-        height: 0.6,
-        spread: 0.45,
-        saltTolerance: 'moyenne',
-        // nurseries: [NURSERIES[0], NURSERIES[1]],
-    },
-    {
-        id: 'acer-ginnala',
-        code: 'ACG',
-        name: "Érable de l'Amour",
-        latin: 'Acer ginnala',
-        type: {
-            value: '1 AR',
-            label: 'Arbre'
-        },
-        zone: 3,
-        soil: ['limoneux', 'riche', 'acide', 'alcalin'],
-        sun: ['plein-soleil', 'mi-ombre'],
-        // colors: ['vert', 'rouge automnal'],
-        // bloom: ['printemps'],
-        isNative: false,
-        height: 6,
-        spread: 5,
-        droughtTolerant: true,
-        // nurseries: [NURSERIES[0]],
-    },
-    {
-        id: 'vaccinium-angustifolium',
-        code: 'VAA',
-        name: 'Bleuet sauvage',
-        latin: 'Vaccinium angustifolium',
-        type: {
-            value: '10 FH',
-            label: 'Fines herbes'
-        },
-        zone: 2,
-        soil: ['acide', 'sablonneux'],
-        sun: ['plein-soleil', 'mi-ombre'],
-        // colors: ['blanc'],
-        // bloom: ['printemps'],
-        isNative: true,
-        saltTolerance: 'haute',
-        height: 0.3,
-        spread: 1,
-        floodTolerant: true,
-        // nurseries: [NURSERIES[1]],
-    },
-    {
-        id: 'hydrangea-paniculata',
-        code: 'HYP',
-        name: 'Hydrangée paniculée',
-        latin: 'Hydrangea paniculata',
-        type: {
-            value: '3 ARBU',
-            label: 'Arbuste'
-        },
-        zone: 3,
-        soil: ['riche', 'limoneux'],
-        sun: ['plein-soleil', 'mi-ombre'],
-        // colors: ['blanc', 'rose'],
-        // bloom: ['été', 'automne'],
-        isNative: false,
-        saltTolerance: 'faible',
-        height: 2,
-        spread: 2,
-        // nurseries: [NURSERIES[2], NURSERIES[0]],
-    },
-    {
-        id: 'thymus-serpyllum',
-        code: 'THY',
-        name: 'Thym serpolet',
-        latin: 'Thymus serpyllum',
-        type: {
-            value: '10 FH',
-            label: 'Fines herbes'
-        },
-        zone: 2,
-        soil: ['pauvre', 'sablonneux'],
-        sun: ['plein-soleil'],
-        // colors: ['mauve', 'rose'],
-        // bloom: ['été'],
-        isNative: false,
-        height: 0.08,
-        spread: 0.5,
-        // nurseries: [NURSERIES[0]],
-    },
-];

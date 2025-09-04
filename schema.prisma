@@ -18,7 +18,7 @@ model plants {
   name            String
   type            String?
   zone            String?
-  isNative        Boolean?
+  native          String?
   droughtTolerant Boolean?
   floodTolerant   Boolean?
   height          Float?
