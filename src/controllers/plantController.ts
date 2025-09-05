@@ -5,7 +5,7 @@ import { parse } from 'csv-parse';
 
 import { CSVPlant, Plant } from '../models/plant';
 import db from '../database/dbConnection';
-import { plantsWhereInput } from '../database/prisma-client/models';
+import { FloatNullableFilter, plantsWhereInput } from '../database/prisma-client/models';
 import { getZoneFilter } from '../helpers/hardinessZoneHelpers';
 
 /*
@@ -145,15 +145,15 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.droughtTolerant) conditions.droughtTolerant = true;
         if (req.query.floodTolerant) conditions.floodTolerant = true;
 
-        if (req.query.heightMin && req.query.heightMax) conditions.height = {
-            gte: (parseInt(req.query.heightMin as string, 10) / 100),
-            lte: (parseInt(req.query.heightMax as string, 10) / 100),
-        };
+        const heightConditions = {} as FloatNullableFilter<never>;
+        if (req.query.heightMin) heightConditions.gte = (parseInt(req.query.heightMin as string, 10) / 100);
+        if (req.query.heightMax) heightConditions.lte = (parseInt(req.query.heightMax as string, 10) / 100);
+        conditions.height = heightConditions;
 
-        if (req.query.spreadMin && req.query.spreadMax) conditions.spread = {
-            gte: (parseInt(req.query.spreadMin as string, 10) / 100),
-            lte: (parseInt(req.query.spreadMax as string, 10) / 100),
-        };
+        const spreadConditions = {} as FloatNullableFilter<never>;
+        if (req.query.spreadMin) spreadConditions.gte = (parseInt(req.query.spreadMin as string, 10) / 100);
+        if (req.query.spreadMax) spreadConditions.lte = (parseInt(req.query.spreadMax as string, 10) / 100);
+        conditions.spread = spreadConditions;
 
         if (req.query.floodTolerant) conditions.floodTolerant = true;
 
@@ -161,8 +161,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         // if (req.query.saltConditions) conditions.saltTolerance = String(req.query.saltConditions) as Filters['saltConditions'];
 
         const filteredPlants = await db.plants.findMany({
-            take: 100,
-            skip: 0,
             select: {
                 id: true,
                 code: true,
