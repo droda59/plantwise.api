@@ -35,7 +35,6 @@ const getGenusList = async (req: Request, res: Response, next: NextFunction) => 
     }
 };
 
-// Read single item
 const getSpeciesForGenus = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const speciesList = await db.plants.findMany({
