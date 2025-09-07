@@ -124,6 +124,8 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
 
         if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
 
+        if (req.query.species) conditions.species = String(req.query.species);
+
         const filteredPlants = await db.plants.findMany({
             where: conditions,
             orderBy: {
