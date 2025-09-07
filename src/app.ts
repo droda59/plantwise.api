@@ -1,6 +1,8 @@
 import express from 'express';
 
 import plantRoutes from './routes/plantRoutes';
+import genusRoutes from './routes/genusRoutes';
+import speciesRoutes from './routes/speciesRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
@@ -19,5 +21,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/plants', plantRoutes);
+app.use('/api/genus', genusRoutes);
+app.use('/api/species', speciesRoutes);
 
 export default app;

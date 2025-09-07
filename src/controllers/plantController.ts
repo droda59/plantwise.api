@@ -8,41 +8,6 @@ import db from '../database/dbConnection';
 import { FloatNullableFilter, plantsWhereInput } from '../database/prisma-client/models';
 import { getZoneFilter } from '../helpers/hardinessZoneHelpers';
 
-/*
-function filterPlant(plant: Plant, filters: Filters): boolean {
-    if (filters.q) {
-        const q = filters.q.toLowerCase();
-        if (!(plant.name.toLowerCase().includes(q) || plant.latin.toLowerCase().includes(q))) return false;
-    }
-    if (filters.type && plant.type.value !== filters.type) return false;
-    if (filters.soil && !plant.soil.includes(filters.soil)) return false;
-    if (filters.sun && !plant.sun.includes(filters.sun)) return false;
-    switch (filters.saltConditions) {
-        case 'haute': if (plant.saltTolerance !== 'haute') return false;
-        case 'moyenne': if (plant.saltTolerance !== 'haute' && plant.saltTolerance !== 'moyenne') return false;
-        case 'faible': if (plant.saltTolerance !== 'haute' && plant.saltTolerance !== 'moyenne' && plant.saltTolerance !== 'faible') return false;
-        default: break;
-    }
-    const plantHeight = plant.height * 100; // Convert to cm for comparison
-    if (filters.heightMin && plantHeight < filters.heightMin) return false;
-    if (filters.heightMax && plantHeight > filters.heightMax) return false;
-
-    const plantSpread = plant.spread * 100; // Convert to cm for comparison
-    if (filters.spreadMin && plantSpread < filters.spreadMin) return false;
-    if (filters.spreadMax && plantSpread > filters.spreadMax) return false;
-
-    // if (filters.color && !plant.colors.includes(filters.color)) return false;
-    // if (filters.bloom && !plant.bloom.includes(filters.bloom)) return false;
-    if (filters.native && !plant.isNative) return false;
-    if (filters.droughtTolerant && !plant.droughtTolerant) return false;
-    if (filters.floodTolerant && !plant.floodTolerant) return false;
-    if (filters.zone && plant.zone > filters.zone) return false;
-
-    return true;
-}
-*/
-
-// Create an item
 const createItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const sanitizePlants = (rows: CSVPlant[]) => {
@@ -140,7 +105,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             conditions.name = { contains: searchQuery };
         }
         if (req.query.type) conditions.type = String(req.query.type);
-        if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) }; //String(req.query.zone);
+        if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) };
         if (req.query.native) conditions.native = 'i';
         if (req.query.droughtTolerant) conditions.droughtTolerant = true;
         if (req.query.floodTolerant) conditions.floodTolerant = true;
@@ -158,27 +123,8 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.floodTolerant) conditions.floodTolerant = true;
 
         if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
-        // if (req.query.saltConditions) conditions.saltTolerance = String(req.query.saltConditions) as Filters['saltConditions'];
 
         const filteredPlants = await db.plants.findMany({
-            select: {
-                id: true,
-                code: true,
-                latin: true,
-                name: true,
-                type: true,
-                zone: true,
-                native: true,
-                droughtTolerant: true,
-                floodTolerant: true,
-                height: true,
-                spread: true,
-                saltTolerance: true,
-                family: true,
-                genus: true,
-                species: true,
-                functionalGroup: true,
-            },
             where: conditions,
             orderBy: {
                 latin: 'asc'
@@ -186,34 +132,14 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         });
 
         res.json(filteredPlants);
-        // res.send('ok');
     } catch (error) {
         next(error);
     }
 };
 
-// Read single item
 const getItemByCode = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const foundPlant = await db.plants.findUniqueOrThrow({
-            select: {
-                id: true,
-                code: true,
-                latin: true,
-                name: true,
-                type: true,
-                zone: true,
-                native: true,
-                droughtTolerant: true,
-                floodTolerant: true,
-                height: true,
-                spread: true,
-                saltTolerance: true,
-                family: true,
-                genus: true,
-                species: true,
-                functionalGroup: true,
-            },
             where: { code: req.params.id as string },
         });
 
@@ -224,45 +150,9 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
     }
 };
 
-// Update an item
-/*
-const updateItem = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const { name } = req.body;
-        const itemIndex = STARTER_PLANTS.findIndex((i) => i.code === req.params.id);
-        if (itemIndex === -1) {
-            res.status(404).json({ message: 'Item not found' });
-            return;
-        }
-        STARTER_PLANTS[itemIndex].name = name;
-        res.json(STARTER_PLANTS[itemIndex]);
-    } catch (error) {
-        next(error);
-    }
-};
-*/
-
-// Delete an item
-/*
-const deleteItem = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const itemIndex = STARTER_PLANTS.findIndex(i => i.code === req.params.id);
-        if (itemIndex === -1) {
-            res.status(404).json({ message: 'Item not found' });
-            return;
-        }
-        const deletedItem = STARTER_PLANTS.splice(itemIndex, 1)[0];
-        res.json(deletedItem);
-    } catch (error) {
-        next(error);
-    }
-};
-*/
 
 export {
     createItems,
     getItems,
     getItemByCode,
-    // updateItem,
-    // deleteItem,
 };
