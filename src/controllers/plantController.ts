@@ -100,7 +100,8 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const conditions: plantsWhereInput = {};
         if (req.query.q) {
-            const searchQuery = String(req.query.q).toLowerCase();
+            // TODO devrait être OR ici
+            const searchQuery = String(req.query.q);
             conditions.latin = { contains: searchQuery };
             conditions.name = { contains: searchQuery };
         }
@@ -124,6 +125,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
 
         if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
 
+        if (req.query.genus) conditions.genus = String(req.query.genus);
         if (req.query.species) conditions.species = String(req.query.species);
 
         const filteredPlants = await db.plants.findMany({
@@ -155,7 +157,6 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
 
 const createItem = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { code, latin, name } = req.body;
         const createdItem = await db.plants.create({
             data: {
                 code: req.body.code,
