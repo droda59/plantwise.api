@@ -141,7 +141,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
 
 const getItemByCode = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const foundPlant = await db.plants.findUniqueOrThrow({
+        const foundPlant = await db.plants.findUnique({
             where: { code: req.params.id as string },
         });
 
@@ -153,8 +153,38 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
 };
 
 
+const createItem = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { code, latin, name } = req.body;
+        const createdItem = await db.plants.create({
+            data: {
+                code: req.body.code,
+                latin: req.body.latin,
+                name: req.body.name,
+                type: req.body.type || undefined,
+                zone: req.body.zone || undefined,
+                native: req.body.native || undefined,
+                droughtTolerant: req.body.droughtTolerant || undefined,
+                floodTolerant: req.body.floodTolerant || undefined,
+                height: req.body.height || undefined,
+                spread: req.body.spread || undefined,
+                saltTolerance: req.body.saltTolerance || undefined,
+                family: req.body.family || undefined,
+                genus: req.body.genus || undefined,
+                species: req.body.species || undefined,
+                functionalGroup: req.body.functionalGroup || undefined,
+            }
+        });
+
+        res.status(201).json(createdItem);
+    } catch (error) {
+        next(error);
+    }
+};
+
 export {
     createItems,
     getItems,
     getItemByCode,
+    createItem
 };
