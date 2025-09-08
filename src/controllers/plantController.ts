@@ -98,13 +98,17 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
 const getItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const conditions: plantsWhereInput = {};
+        const textConditions: plantsWhereInput = {};
         if (req.query.q) {
-            // TODO devrait être OR ici
             const searchQuery = String(req.query.q);
-            conditions.latin = { contains: searchQuery };
-            conditions.name = { contains: searchQuery };
+            
+            textConditions.OR = [
+                { latin: { contains: searchQuery }},
+                { name: { contains: searchQuery }}, 
+            ];
         }
+
+        const conditions: plantsWhereInput = {};
         if (req.query.type) conditions.type = String(req.query.type);
         if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) };
         if (req.query.native) conditions.native = 'i';
@@ -128,8 +132,14 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.genus) conditions.genus = String(req.query.genus);
         if (req.query.species) conditions.species = String(req.query.species);
 
+        const allConditions: plantsWhereInput = {
+            AND: [
+                textConditions,
+                conditions,
+            ]
+        };
         const filteredPlants = await db.plants.findMany({
-            where: conditions,
+            where: allConditions,
             orderBy: {
                 latin: 'asc'
             }
