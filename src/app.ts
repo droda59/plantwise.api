@@ -1,4 +1,5 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
+import cors from 'cors';
 
 import plantRoutes from './routes/plantRoutes';
 import genusRoutes from './routes/genusRoutes';
@@ -7,16 +8,30 @@ import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 
+const customCors = (req: any, res: any, next: NextFunction) => {
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+
+    // Handle preflight request (OPTIONS)
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+
+    // Proceed to next middleware or route
+    next();
+};
+app.use(cors());
+app.use(customCors);
 app.use(express.json());
 
 // Global error handler (should be after routes)
 app.use(errorHandler);
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-
-    next();
-});
 
 // Routes
 app.use('/api/plants', plantRoutes);
