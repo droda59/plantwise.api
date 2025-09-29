@@ -28,6 +28,3 @@ npm-debug.log*
 
 # typescript
 *.tsbuildinfo
-
-/src/database/prisma-client-js
-/src/database/prisma-client
