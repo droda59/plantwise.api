@@ -540,7 +540,8 @@ export const PlantsScalarFieldEnum = {
   family: 'family',
   genus: 'genus',
   species: 'species',
-  functionalGroup: 'functionalGroup'
+  functionalGroup: 'functionalGroup',
+  sunTolerance: 'sunTolerance'
 } as const
 
 export type PlantsScalarFieldEnum = (typeof PlantsScalarFieldEnum)[keyof typeof PlantsScalarFieldEnum]

@@ -28,4 +28,5 @@ model plants {
   genus           String?
   species         String?
   functionalGroup String?
+  sunTolerance             String?
 }

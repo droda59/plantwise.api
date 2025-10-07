@@ -14,14 +14,26 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             // Attendu: colonnes similaires à exportRows ci-dessus. Les champs non conformes seront ignorés.
             const toPlant = (r: any) => {
                 const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
+
+                const fullSun = cleanup(r['Ensoleillement plein soleil']) === 'm';
+                const sunShade = cleanup(r['Ensoleillement soleil-mi-ombre']) === 's';
+                const partialShade = cleanup(r['Ensoleillement mi-ombre']) === 'w';
+                const shade = cleanup(r['Ensoleillement ombre']) === 'l';
+
+                const suns: ('full' | 'partial' | 'shade')[] = [];
+                if (fullSun || sunShade) suns.push('full');
+                if (sunShade || partialShade) suns.push('partial');
+                if (partialShade || shade) suns.push('shade');
+
+                console.log(cleanup(r['Nom BOTANIQUE']), fullSun, sunShade, partialShade, shade, suns.join(','));
+
                 const p: Plant = {
                     code: cleanup(r['CODE']),
                     name: cleanup(r['Nom commun']) || '',
                     latin: cleanup(r['Nom BOTANIQUE']) || '',
                     type: cleanup(r['Type']) || '',
                     zone: cleanup(r['Zone']) || undefined,
-                    soil: [], // arr(r.soil),
-                    sun: [], // (arr(r.soleil)),
+                    sunTolerance: suns.join(','),
                     // colors: arr(r.couleurs),
                     // bloom: (arr(r.floraison)),
                     native: cleanup(r['indig/nat']),
@@ -31,8 +43,8 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     genus: cleanup(r['Genre']),
                     species: cleanup(r['Espèce']),
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
-                    // nurseries: NURSERIES.slice(0, 1),
                 };
+                console.log(p);
                 return p;
             };
 
@@ -65,6 +77,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             });
         }
 
+        await db.plants.deleteMany();
         const fileData = await readCSV('../data/Plantation - liste globale short.csv');
         const newRows = sanitizePlants(fileData as CSVPlant[]);
 
@@ -84,6 +97,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             genus: p.genus,
             species: p.species,
             functionalGroup: p.functionalGroup,
+            sunTolerance: p.sunTolerance,
         }));
         const filteredPlants = await db.plants.createMany({
             data: rows,
@@ -101,10 +115,10 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         const textConditions: plantsWhereInput = {};
         if (req.query.q) {
             const searchQuery = String(req.query.q);
-            
+
             textConditions.OR = [
-                { latin: { contains: searchQuery }},
-                { name: { contains: searchQuery }}, 
+                { latin: { contains: searchQuery } },
+                { name: { contains: searchQuery } },
             ];
         }
 
@@ -114,6 +128,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.native) conditions.native = 'i';
         if (req.query.droughtTolerant) conditions.droughtTolerant = true;
         if (req.query.floodTolerant) conditions.floodTolerant = true;
+        if (req.query.sun) conditions.sunTolerance = { contains: String(req.query.sun) };
 
         const heightConditions = {} as FloatNullableFilter<never>;
         if (req.query.heightMin) heightConditions.gte = (parseInt(req.query.heightMin as string, 10) / 100);
@@ -174,6 +189,7 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
                 name: req.body.name,
                 type: req.body.type || undefined,
                 zone: req.body.zone || undefined,
+                sunTolerance: req.body.sunTolerance || undefined,
                 native: req.body.native || undefined,
                 droughtTolerant: req.body.droughtTolerant || undefined,
                 floodTolerant: req.body.floodTolerant || undefined,
