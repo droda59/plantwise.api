@@ -12,7 +12,7 @@ datasource db {
 
 model plants {
   id              Int     @id @default(autoincrement())
-  code            String  @unique(map: "sqlite_autoindex_plants_1")
+  code            String  @unique(map: "sqlite_autoindex_plants_1") COLLATE NOCASE
   latin           String
   name            String
   type            String?

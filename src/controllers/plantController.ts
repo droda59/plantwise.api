@@ -102,6 +102,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             data: rows,
         });
 
+        console.log(filteredPlants.count);
         res.json(filteredPlants);
     } catch (error) {
         next(error);
