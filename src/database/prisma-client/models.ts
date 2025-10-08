@@ -7,5 +7,5 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/plants.ts'
-export type * from './commonInputTypes.ts'
+export type * from './models/plants'
+export type * from './commonInputTypes'

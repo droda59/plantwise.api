@@ -11,7 +11,7 @@
  */
 
 import * as runtime from "@prisma/client/runtime/library"
-import type * as Prisma from "./prismaNamespace.ts"
+import type * as Prisma from "./prismaNamespace"
 
 
 const config: runtime.GetPrismaClientConfig = {
@@ -26,7 +26,6 @@ const config: runtime.GetPrismaClientConfig = {
       "fromEnvVar": null
     },
     "config": {
-      "importFileExtension": "ts",
       "generatedFileExtension": "ts",
       "engineType": "library"
     },
@@ -50,6 +49,7 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -58,8 +58,8 @@ const config: runtime.GetPrismaClientConfig = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider               = \"prisma-client\"\n  output                 = \"./src/database/prisma-client\"\n  previewFeatures        = [\"driverAdapters\"]\n  generatedFileExtension = \"ts\"\n  importFileExtension    = \"ts\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./database/dev.db\"\n}\n\nmodel plants {\n  id              Int      @id @default(autoincrement())\n  code            String   @unique(map: \"sqlite_autoindex_plants_1\")\n  latin           String\n  name            String\n  type            String?\n  zone            String?\n  native          String?\n  droughtTolerant Boolean?\n  floodTolerant   Boolean?\n  height          Float?\n  spread          Float?\n  saltTolerance   String?\n  family          String?\n  genus           String?\n  species         String?\n  functionalGroup String?\n  sunTolerance    String?\n  bloom           String?\n}\n",
-  "inlineSchemaHash": "2593d8100000ac15ab53ec8bd62ef0afce714824967f150bc219af9fcee69415",
+  "inlineSchema": "generator client {\n  provider               = \"prisma-client\"\n  output                 = \"./src/database/prisma-client\"\n  previewFeatures        = [\"driverAdapters\"]\n  generatedFileExtension = \"ts\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./database/dev.db\"\n}\n\nmodel plants {\n  id              Int      @id @default(autoincrement())\n  code            String   @unique(map: \"sqlite_autoindex_plants_1\")\n  latin           String\n  name            String\n  type            String?\n  zone            String?\n  native          String?\n  droughtTolerant Boolean?\n  floodTolerant   Boolean?\n  height          Float?\n  spread          Float?\n  saltTolerance   String?\n  family          String?\n  genus           String?\n  species         String?\n  functionalGroup String?\n  sunTolerance    String?\n  bloom           String?\n}\n",
+  "inlineSchemaHash": "83d90010a5766de0f6ddcd2f2e51511a420d7360294625fd9bd95efc60032fe1",
   "copyEngine": true,
   "runtimeDataModel": {
     "models": {},

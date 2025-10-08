@@ -3,7 +3,6 @@ generator client {
   output                 = "./src/database/prisma-client"
   previewFeatures        = ["driverAdapters"]
   generatedFileExtension = "ts"
-  importFileExtension    = "ts"
 }
 
 datasource db {
