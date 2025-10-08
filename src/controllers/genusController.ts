@@ -4,32 +4,20 @@ import db from '../database/dbConnection';
 
 const getGenusList = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const genusList = await db.plants.findMany({
-            select: {
-                id: false,
-                code: false,
-                latin: false,
-                name: false,
-                type: false,
-                zone: false,
-                native: false,
-                droughtTolerant: false,
-                floodTolerant: false,
-                height: false,
-                spread: false,
-                saltTolerance: false,
-                family: false,
-                genus: true,
-                species: false,
-                functionalGroup: false,
+        const genusList = await db.plants.groupBy({
+            by: ['genus'],
+            _count: {
+                genus: true
             },
-            distinct: ['genus'],
             orderBy: {
                 genus: 'asc'
             }
         });
 
-        res.json(genusList.map(g => g.genus));
+        res.json(genusList.map(g => ({
+            genus: g.genus,
+            count: g._count.genus
+        })));
     } catch (error) {
         next(error);
     }
@@ -37,33 +25,21 @@ const getGenusList = async (req: Request, res: Response, next: NextFunction) => 
 
 const getSpeciesForGenus = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const speciesList = await db.plants.findMany({
-            select: {
-                id: false,
-                code: false,
-                latin: false,
-                name: false,
-                type: false,
-                zone: false,
-                native: false,
-                droughtTolerant: false,
-                floodTolerant: false,
-                height: false,
-                spread: false,
-                saltTolerance: false,
-                family: false,
-                genus: false,
-                species: true,
-                functionalGroup: false,
+        const speciesList = await db.plants.groupBy({
+            by: ['species'],
+            _count: {
+                species: true
             },
             where: { genus: req.params.id as string },
-            distinct: ['species'],
             orderBy: {
                 species: 'asc'
             }
         });
 
-        res.json(speciesList.map(s => s.species));
+        res.json(speciesList.map(s => ({
+            species: s.species,
+            count: s._count.species
+        })));
     } catch (error) {
         next(error);
     }
