@@ -76,7 +76,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
         }
 
         await db.plants.deleteMany();
-        const fileData = await readCSV('../data/Plantation - liste globale short.csv');
+        const fileData = await readCSV('../data/Plantation - liste globale.csv');
         const newRows = sanitizePlants(fileData as any[]);
 
         const rows = newRows.map(p => ({
