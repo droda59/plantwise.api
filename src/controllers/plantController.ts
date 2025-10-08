@@ -43,7 +43,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     species: cleanup(r['Espèce']),
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
                 };
-                console.log(p);
                 return p;
             };
 
@@ -103,7 +102,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             data: rows,
         });
 
-        console.log(filteredPlants);
         res.json(filteredPlants);
     } catch (error) {
         next(error);
@@ -174,7 +172,6 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
             where: { code: req.params.id as string },
         });
 
-        console.log('Found ', foundPlant);
         res.json(foundPlant);
     } catch (error) {
         next(error);
