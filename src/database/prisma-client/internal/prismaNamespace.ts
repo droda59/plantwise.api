@@ -541,7 +541,8 @@ export const PlantsScalarFieldEnum = {
   genus: 'genus',
   species: 'species',
   functionalGroup: 'functionalGroup',
-  sunTolerance: 'sunTolerance'
+  sunTolerance: 'sunTolerance',
+  bloom: 'bloom'
 } as const
 
 export type PlantsScalarFieldEnum = (typeof PlantsScalarFieldEnum)[keyof typeof PlantsScalarFieldEnum]

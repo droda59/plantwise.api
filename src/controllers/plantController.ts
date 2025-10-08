@@ -3,14 +3,16 @@ import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse';
 
-import { CSVPlant, Plant } from '../models/plant';
 import db from '../database/dbConnection';
-import { FloatNullableFilter, plantsWhereInput } from '../database/prisma-client/models';
+import { FloatNullableFilter, plantsWhereInput, StringNullableFilter } from '../database/prisma-client/models';
 import { getZoneFilter } from '../helpers/hardinessZoneHelpers';
+import { Plant } from '../models/plant';
+
+const toInt = (value: any) => parseInt(value as string, 10) / 100;
 
 const createItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const sanitizePlants = (rows: CSVPlant[]) => {
+        const sanitizePlants = (rows: any[]) => {
             // Attendu: colonnes similaires à exportRows ci-dessus. Les champs non conformes seront ignorés.
             const toPlant = (r: any) => {
                 const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
@@ -25,8 +27,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                 if (sunShade || partialShade) suns.push('partial');
                 if (partialShade || shade) suns.push('shade');
 
-                console.log(cleanup(r['Nom BOTANIQUE']), fullSun, sunShade, partialShade, shade, suns.join(','));
-
                 const p: Plant = {
                     code: cleanup(r['CODE']),
                     name: cleanup(r['Nom commun']) || '',
@@ -34,8 +34,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     type: cleanup(r['Type']) || '',
                     zone: cleanup(r['Zone']) || undefined,
                     sunTolerance: suns.join(','),
-                    // colors: arr(r.couleurs),
-                    // bloom: (arr(r.floraison)),
+                    bloom: cleanup(r['Flor']) || undefined,
                     native: cleanup(r['indig/nat']),
                     height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
                     spread: Number(cleanup(r['L'])) || undefined,
@@ -79,19 +78,20 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
         await db.plants.deleteMany();
         const fileData = await readCSV('../data/Plantation - liste globale short.csv');
-        const newRows = sanitizePlants(fileData as CSVPlant[]);
+        const newRows = sanitizePlants(fileData as any[]);
 
         const rows = newRows.map(p => ({
             code: p.code,
             latin: p.latin,
             name: p.name,
-            type: p.type.toString(),
+            type: p.type,
             zone: p.zone,
             native: p.native,
             droughtTolerant: p.droughtTolerant,
             floodTolerant: p.floodTolerant,
             height: p.height,
             spread: p.spread,
+            bloom: p.bloom,
             saltTolerance: p.saltTolerance,
             family: p.family,
             genus: p.genus,
@@ -129,15 +129,16 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.droughtTolerant) conditions.droughtTolerant = true;
         if (req.query.floodTolerant) conditions.floodTolerant = true;
         if (req.query.sun) conditions.sunTolerance = { contains: String(req.query.sun) };
+        if (req.query.bloom) conditions.bloom = { contains: String(req.query.bloom) };
 
         const heightConditions = {} as FloatNullableFilter<never>;
-        if (req.query.heightMin) heightConditions.gte = (parseInt(req.query.heightMin as string, 10) / 100);
-        if (req.query.heightMax) heightConditions.lte = (parseInt(req.query.heightMax as string, 10) / 100);
+        if (req.query.heightMin) heightConditions.gte = toInt(req.query.heightMin);
+        if (req.query.heightMax) heightConditions.lte = toInt(req.query.heightMax);
         conditions.height = heightConditions;
 
         const spreadConditions = {} as FloatNullableFilter<never>;
-        if (req.query.spreadMin) spreadConditions.gte = (parseInt(req.query.spreadMin as string, 10) / 100);
-        if (req.query.spreadMax) spreadConditions.lte = (parseInt(req.query.spreadMax as string, 10) / 100);
+        if (req.query.spreadMin) spreadConditions.gte = toInt(req.query.spreadMin);
+        if (req.query.spreadMax) spreadConditions.lte = toInt(req.query.spreadMax);
         conditions.spread = spreadConditions;
 
         if (req.query.floodTolerant) conditions.floodTolerant = true;
@@ -160,6 +161,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             }
         });
 
+        // TODO Format plant to return known format instead of legit db row
         res.json(filteredPlants);
     } catch (error) {
         next(error);
@@ -189,6 +191,7 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
                 name: req.body.name,
                 type: req.body.type || undefined,
                 zone: req.body.zone || undefined,
+                bloom: req.body.bloom || undefined,
                 sunTolerance: req.body.sunTolerance || undefined,
                 native: req.body.native || undefined,
                 droughtTolerant: req.body.droughtTolerant || undefined,
