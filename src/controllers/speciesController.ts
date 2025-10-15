@@ -10,9 +10,13 @@ const getAllSpecies = async (req: Request, res: Response, next: NextFunction) =>
                 species: true
             },
             where: { genus: req.params.id as string },
-            orderBy: {
-                species: 'asc'
-            }
+            orderBy: [
+                {
+                    genus: 'asc'
+                }, {
+                    species: 'asc'
+                }
+            ]
         });
 
         res.json(speciesList.map(s => ({
