@@ -50,12 +50,17 @@ export type PlantsMinAggregateOutputType = {
   height: number | null
   spread: number | null
   saltTolerance: string | null
+  sunTolerance: string | null
+  bloom: string | null
   family: string | null
   genus: string | null
   species: string | null
+  cultivar: string | null
+  note: string | null
+  synonym: string | null
+  commonName: string | null
   functionalGroup: string | null
-  sunTolerance: string | null
-  bloom: string | null
+  vascanID: string | null
 }
 
 export type PlantsMaxAggregateOutputType = {
@@ -71,12 +76,17 @@ export type PlantsMaxAggregateOutputType = {
   height: number | null
   spread: number | null
   saltTolerance: string | null
+  sunTolerance: string | null
+  bloom: string | null
   family: string | null
   genus: string | null
   species: string | null
+  cultivar: string | null
+  note: string | null
+  synonym: string | null
+  commonName: string | null
   functionalGroup: string | null
-  sunTolerance: string | null
-  bloom: string | null
+  vascanID: string | null
 }
 
 export type PlantsCountAggregateOutputType = {
@@ -92,12 +102,17 @@ export type PlantsCountAggregateOutputType = {
   height: number
   spread: number
   saltTolerance: number
+  sunTolerance: number
+  bloom: number
   family: number
   genus: number
   species: number
+  cultivar: number
+  note: number
+  synonym: number
+  commonName: number
   functionalGroup: number
-  sunTolerance: number
-  bloom: number
+  vascanID: number
   _all: number
 }
 
@@ -127,12 +142,17 @@ export type PlantsMinAggregateInputType = {
   height?: true
   spread?: true
   saltTolerance?: true
+  sunTolerance?: true
+  bloom?: true
   family?: true
   genus?: true
   species?: true
+  cultivar?: true
+  note?: true
+  synonym?: true
+  commonName?: true
   functionalGroup?: true
-  sunTolerance?: true
-  bloom?: true
+  vascanID?: true
 }
 
 export type PlantsMaxAggregateInputType = {
@@ -148,12 +168,17 @@ export type PlantsMaxAggregateInputType = {
   height?: true
   spread?: true
   saltTolerance?: true
+  sunTolerance?: true
+  bloom?: true
   family?: true
   genus?: true
   species?: true
+  cultivar?: true
+  note?: true
+  synonym?: true
+  commonName?: true
   functionalGroup?: true
-  sunTolerance?: true
-  bloom?: true
+  vascanID?: true
 }
 
 export type PlantsCountAggregateInputType = {
@@ -169,12 +194,17 @@ export type PlantsCountAggregateInputType = {
   height?: true
   spread?: true
   saltTolerance?: true
+  sunTolerance?: true
+  bloom?: true
   family?: true
   genus?: true
   species?: true
+  cultivar?: true
+  note?: true
+  synonym?: true
+  commonName?: true
   functionalGroup?: true
-  sunTolerance?: true
-  bloom?: true
+  vascanID?: true
   _all?: true
 }
 
@@ -277,12 +307,17 @@ export type PlantsGroupByOutputType = {
   height: number | null
   spread: number | null
   saltTolerance: string | null
+  sunTolerance: string | null
+  bloom: string | null
   family: string | null
   genus: string | null
   species: string | null
+  cultivar: string | null
+  note: string | null
+  synonym: string | null
+  commonName: string | null
   functionalGroup: string | null
-  sunTolerance: string | null
-  bloom: string | null
+  vascanID: string | null
   _count: PlantsCountAggregateOutputType | null
   _avg: PlantsAvgAggregateOutputType | null
   _sum: PlantsSumAggregateOutputType | null
@@ -321,12 +356,17 @@ export type plantsWhereInput = {
   height?: Prisma.FloatNullableFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableFilter<"plants"> | number | null
   saltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  bloom?: Prisma.StringNullableFilter<"plants"> | string | null
   family?: Prisma.StringNullableFilter<"plants"> | string | null
   genus?: Prisma.StringNullableFilter<"plants"> | string | null
   species?: Prisma.StringNullableFilter<"plants"> | string | null
+  cultivar?: Prisma.StringNullableFilter<"plants"> | string | null
+  note?: Prisma.StringNullableFilter<"plants"> | string | null
+  synonym?: Prisma.StringNullableFilter<"plants"> | string | null
+  commonName?: Prisma.StringNullableFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableFilter<"plants"> | string | null
-  sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
-  bloom?: Prisma.StringNullableFilter<"plants"> | string | null
+  vascanID?: Prisma.StringNullableFilter<"plants"> | string | null
 }
 
 export type plantsOrderByWithRelationInput = {
@@ -342,12 +382,17 @@ export type plantsOrderByWithRelationInput = {
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   spread?: Prisma.SortOrderInput | Prisma.SortOrder
   saltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  bloom?: Prisma.SortOrderInput | Prisma.SortOrder
   family?: Prisma.SortOrderInput | Prisma.SortOrder
   genus?: Prisma.SortOrderInput | Prisma.SortOrder
   species?: Prisma.SortOrderInput | Prisma.SortOrder
+  cultivar?: Prisma.SortOrderInput | Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
+  synonym?: Prisma.SortOrderInput | Prisma.SortOrder
+  commonName?: Prisma.SortOrderInput | Prisma.SortOrder
   functionalGroup?: Prisma.SortOrderInput | Prisma.SortOrder
-  sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
-  bloom?: Prisma.SortOrderInput | Prisma.SortOrder
+  vascanID?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type plantsWhereUniqueInput = Prisma.AtLeast<{
@@ -366,12 +411,17 @@ export type plantsWhereUniqueInput = Prisma.AtLeast<{
   height?: Prisma.FloatNullableFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableFilter<"plants"> | number | null
   saltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  bloom?: Prisma.StringNullableFilter<"plants"> | string | null
   family?: Prisma.StringNullableFilter<"plants"> | string | null
   genus?: Prisma.StringNullableFilter<"plants"> | string | null
   species?: Prisma.StringNullableFilter<"plants"> | string | null
+  cultivar?: Prisma.StringNullableFilter<"plants"> | string | null
+  note?: Prisma.StringNullableFilter<"plants"> | string | null
+  synonym?: Prisma.StringNullableFilter<"plants"> | string | null
+  commonName?: Prisma.StringNullableFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableFilter<"plants"> | string | null
-  sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
-  bloom?: Prisma.StringNullableFilter<"plants"> | string | null
+  vascanID?: Prisma.StringNullableFilter<"plants"> | string | null
 }, "id" | "code">
 
 export type plantsOrderByWithAggregationInput = {
@@ -387,12 +437,17 @@ export type plantsOrderByWithAggregationInput = {
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   spread?: Prisma.SortOrderInput | Prisma.SortOrder
   saltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  bloom?: Prisma.SortOrderInput | Prisma.SortOrder
   family?: Prisma.SortOrderInput | Prisma.SortOrder
   genus?: Prisma.SortOrderInput | Prisma.SortOrder
   species?: Prisma.SortOrderInput | Prisma.SortOrder
+  cultivar?: Prisma.SortOrderInput | Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
+  synonym?: Prisma.SortOrderInput | Prisma.SortOrder
+  commonName?: Prisma.SortOrderInput | Prisma.SortOrder
   functionalGroup?: Prisma.SortOrderInput | Prisma.SortOrder
-  sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
-  bloom?: Prisma.SortOrderInput | Prisma.SortOrder
+  vascanID?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.plantsCountOrderByAggregateInput
   _avg?: Prisma.plantsAvgOrderByAggregateInput
   _max?: Prisma.plantsMaxOrderByAggregateInput
@@ -416,12 +471,17 @@ export type plantsScalarWhereWithAggregatesInput = {
   height?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
   saltTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  sunTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  bloom?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   family?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   genus?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   species?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  cultivar?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  note?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  synonym?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  commonName?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
-  sunTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
-  bloom?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  vascanID?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
 }
 
 export type plantsCreateInput = {
@@ -436,12 +496,17 @@ export type plantsCreateInput = {
   height?: number | null
   spread?: number | null
   saltTolerance?: string | null
+  sunTolerance?: string | null
+  bloom?: string | null
   family?: string | null
   genus?: string | null
   species?: string | null
+  cultivar?: string | null
+  note?: string | null
+  synonym?: string | null
+  commonName?: string | null
   functionalGroup?: string | null
-  sunTolerance?: string | null
-  bloom?: string | null
+  vascanID?: string | null
 }
 
 export type plantsUncheckedCreateInput = {
@@ -457,12 +522,17 @@ export type plantsUncheckedCreateInput = {
   height?: number | null
   spread?: number | null
   saltTolerance?: string | null
+  sunTolerance?: string | null
+  bloom?: string | null
   family?: string | null
   genus?: string | null
   species?: string | null
+  cultivar?: string | null
+  note?: string | null
+  synonym?: string | null
+  commonName?: string | null
   functionalGroup?: string | null
-  sunTolerance?: string | null
-  bloom?: string | null
+  vascanID?: string | null
 }
 
 export type plantsUpdateInput = {
@@ -477,12 +547,17 @@ export type plantsUpdateInput = {
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   family?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   species?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cultivar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synonym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsUncheckedUpdateInput = {
@@ -498,12 +573,17 @@ export type plantsUncheckedUpdateInput = {
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   family?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   species?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cultivar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synonym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsCreateManyInput = {
@@ -519,12 +599,17 @@ export type plantsCreateManyInput = {
   height?: number | null
   spread?: number | null
   saltTolerance?: string | null
+  sunTolerance?: string | null
+  bloom?: string | null
   family?: string | null
   genus?: string | null
   species?: string | null
+  cultivar?: string | null
+  note?: string | null
+  synonym?: string | null
+  commonName?: string | null
   functionalGroup?: string | null
-  sunTolerance?: string | null
-  bloom?: string | null
+  vascanID?: string | null
 }
 
 export type plantsUpdateManyMutationInput = {
@@ -539,12 +624,17 @@ export type plantsUpdateManyMutationInput = {
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   family?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   species?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cultivar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synonym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsUncheckedUpdateManyInput = {
@@ -560,12 +650,17 @@ export type plantsUncheckedUpdateManyInput = {
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   family?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   species?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cultivar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synonym?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsCountOrderByAggregateInput = {
@@ -581,12 +676,17 @@ export type plantsCountOrderByAggregateInput = {
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
   saltTolerance?: Prisma.SortOrder
+  sunTolerance?: Prisma.SortOrder
+  bloom?: Prisma.SortOrder
   family?: Prisma.SortOrder
   genus?: Prisma.SortOrder
   species?: Prisma.SortOrder
+  cultivar?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  synonym?: Prisma.SortOrder
+  commonName?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
-  sunTolerance?: Prisma.SortOrder
-  bloom?: Prisma.SortOrder
+  vascanID?: Prisma.SortOrder
 }
 
 export type plantsAvgOrderByAggregateInput = {
@@ -608,12 +708,17 @@ export type plantsMaxOrderByAggregateInput = {
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
   saltTolerance?: Prisma.SortOrder
+  sunTolerance?: Prisma.SortOrder
+  bloom?: Prisma.SortOrder
   family?: Prisma.SortOrder
   genus?: Prisma.SortOrder
   species?: Prisma.SortOrder
+  cultivar?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  synonym?: Prisma.SortOrder
+  commonName?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
-  sunTolerance?: Prisma.SortOrder
-  bloom?: Prisma.SortOrder
+  vascanID?: Prisma.SortOrder
 }
 
 export type plantsMinOrderByAggregateInput = {
@@ -629,12 +734,17 @@ export type plantsMinOrderByAggregateInput = {
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
   saltTolerance?: Prisma.SortOrder
+  sunTolerance?: Prisma.SortOrder
+  bloom?: Prisma.SortOrder
   family?: Prisma.SortOrder
   genus?: Prisma.SortOrder
   species?: Prisma.SortOrder
+  cultivar?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  synonym?: Prisma.SortOrder
+  commonName?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
-  sunTolerance?: Prisma.SortOrder
-  bloom?: Prisma.SortOrder
+  vascanID?: Prisma.SortOrder
 }
 
 export type plantsSumOrderByAggregateInput = {
@@ -686,12 +796,17 @@ export type plantsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   height?: boolean
   spread?: boolean
   saltTolerance?: boolean
+  sunTolerance?: boolean
+  bloom?: boolean
   family?: boolean
   genus?: boolean
   species?: boolean
+  cultivar?: boolean
+  note?: boolean
+  synonym?: boolean
+  commonName?: boolean
   functionalGroup?: boolean
-  sunTolerance?: boolean
-  bloom?: boolean
+  vascanID?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -707,12 +822,17 @@ export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   height?: boolean
   spread?: boolean
   saltTolerance?: boolean
+  sunTolerance?: boolean
+  bloom?: boolean
   family?: boolean
   genus?: boolean
   species?: boolean
+  cultivar?: boolean
+  note?: boolean
+  synonym?: boolean
+  commonName?: boolean
   functionalGroup?: boolean
-  sunTolerance?: boolean
-  bloom?: boolean
+  vascanID?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -728,12 +848,17 @@ export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   height?: boolean
   spread?: boolean
   saltTolerance?: boolean
+  sunTolerance?: boolean
+  bloom?: boolean
   family?: boolean
   genus?: boolean
   species?: boolean
+  cultivar?: boolean
+  note?: boolean
+  synonym?: boolean
+  commonName?: boolean
   functionalGroup?: boolean
-  sunTolerance?: boolean
-  bloom?: boolean
+  vascanID?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectScalar = {
@@ -749,15 +874,20 @@ export type plantsSelectScalar = {
   height?: boolean
   spread?: boolean
   saltTolerance?: boolean
+  sunTolerance?: boolean
+  bloom?: boolean
   family?: boolean
   genus?: boolean
   species?: boolean
+  cultivar?: boolean
+  note?: boolean
+  synonym?: boolean
+  commonName?: boolean
   functionalGroup?: boolean
-  sunTolerance?: boolean
-  bloom?: boolean
+  vascanID?: boolean
 }
 
-export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "latin" | "name" | "type" | "zone" | "native" | "droughtTolerant" | "floodTolerant" | "height" | "spread" | "saltTolerance" | "family" | "genus" | "species" | "functionalGroup" | "sunTolerance" | "bloom", ExtArgs["result"]["plants"]>
+export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "latin" | "name" | "type" | "zone" | "native" | "droughtTolerant" | "floodTolerant" | "height" | "spread" | "saltTolerance" | "sunTolerance" | "bloom" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "functionalGroup" | "vascanID", ExtArgs["result"]["plants"]>
 
 export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "plants"
@@ -775,12 +905,17 @@ export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     height: number | null
     spread: number | null
     saltTolerance: string | null
+    sunTolerance: string | null
+    bloom: string | null
     family: string | null
     genus: string | null
     species: string | null
+    cultivar: string | null
+    note: string | null
+    synonym: string | null
+    commonName: string | null
     functionalGroup: string | null
-    sunTolerance: string | null
-    bloom: string | null
+    vascanID: string | null
   }, ExtArgs["result"]["plants"]>
   composites: {}
 }
@@ -1216,12 +1351,17 @@ export interface plantsFieldRefs {
   readonly height: Prisma.FieldRef<"plants", 'Float'>
   readonly spread: Prisma.FieldRef<"plants", 'Float'>
   readonly saltTolerance: Prisma.FieldRef<"plants", 'String'>
+  readonly sunTolerance: Prisma.FieldRef<"plants", 'String'>
+  readonly bloom: Prisma.FieldRef<"plants", 'String'>
   readonly family: Prisma.FieldRef<"plants", 'String'>
   readonly genus: Prisma.FieldRef<"plants", 'String'>
   readonly species: Prisma.FieldRef<"plants", 'String'>
+  readonly cultivar: Prisma.FieldRef<"plants", 'String'>
+  readonly note: Prisma.FieldRef<"plants", 'String'>
+  readonly synonym: Prisma.FieldRef<"plants", 'String'>
+  readonly commonName: Prisma.FieldRef<"plants", 'String'>
   readonly functionalGroup: Prisma.FieldRef<"plants", 'String'>
-  readonly sunTolerance: Prisma.FieldRef<"plants", 'String'>
-  readonly bloom: Prisma.FieldRef<"plants", 'String'>
+  readonly vascanID: Prisma.FieldRef<"plants", 'String'>
 }
     
 

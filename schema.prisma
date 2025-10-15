@@ -13,20 +13,30 @@ datasource db {
 model plants {
   id              Int     @id @default(autoincrement())
   code            String  @unique(map: "sqlite_autoindex_plants_1")
+  
   latin           String
   name            String
   type            String?
+
   zone            String?
   native          String?
-  droughtTolerant Boolean?
-  floodTolerant   Boolean?
   height          Float?
   spread          Float?
+  droughtTolerant Boolean?
+  floodTolerant   Boolean?
   saltTolerance   String?
+  sunTolerance    String?
+  bloom           String?
+
   family          String?
   genus           String?
   species         String?
+  cultivar        String?
+  note            String? 
+  synonym         String? 
+  commonName      String? 
+
   functionalGroup String?
-  sunTolerance             String?
-  bloom         String?
+
+  vascanID        String?
 }

@@ -4,7 +4,7 @@ import path from 'path';
 import { parse } from 'csv-parse';
 
 import db from '../database/dbConnection';
-import { FloatNullableFilter, plantsWhereInput, StringNullableFilter } from '../database/prisma-client/models';
+import { FloatNullableFilter, plantsWhereInput } from '../database/prisma-client/models';
 import { getZoneFilter } from '../helpers/hardinessZoneHelpers';
 import { Plant } from '../models/plant';
 
@@ -29,19 +29,28 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
                 const p: Plant = {
                     code: cleanup(r['CODE']),
+
                     name: cleanup(r['Nom commun']) || '',
                     latin: cleanup(r['Nom BOTANIQUE']) || '',
                     type: cleanup(r['Type']) || '',
+
                     zone: cleanup(r['Zone']) || undefined,
-                    sunTolerance: suns.join(','),
-                    bloom: cleanup(r['Flor']) || undefined,
                     native: cleanup(r['indig/nat']),
                     height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
                     spread: Number(cleanup(r['L'])) || undefined,
+                    sunTolerance: suns.join(','),
+                    bloom: cleanup(r['Flor']) || undefined,
+
                     family: cleanup(r['Famille']),
                     genus: cleanup(r['Genre']),
                     species: cleanup(r['Espèce']),
+                    cultivar: cleanup(r['Cultivar']),
+                    note: cleanup(r['Note']),
+                    synonym: cleanup(r['Synonyme']),
+                    commonName: cleanup(r['Nom vernaculaire']),
+
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
+                    vascanID: cleanup(r['ID vascan']),
                 };
                 return p;
             };
@@ -81,22 +90,31 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
         const rows = newRows.map(p => ({
             code: p.code,
+
             latin: p.latin,
             name: p.name,
             type: p.type,
+
             zone: p.zone,
             native: p.native,
-            droughtTolerant: p.droughtTolerant,
-            floodTolerant: p.floodTolerant,
             height: p.height,
             spread: p.spread,
-            bloom: p.bloom,
+            droughtTolerant: p.droughtTolerant,
+            floodTolerant: p.floodTolerant,
             saltTolerance: p.saltTolerance,
+            sunTolerance: p.sunTolerance,
+            bloom: p.bloom,
+
             family: p.family,
             genus: p.genus,
             species: p.species,
+            cultivar: p.cultivar,
+            note: p.note,
+            synonym: p.synonym,
+            commonName: p.commonName,
+
             functionalGroup: p.functionalGroup,
-            sunTolerance: p.sunTolerance,
+            vascanID: p.vascanID,
         }));
         const filteredPlants = await db.plants.createMany({
             data: rows,
@@ -116,8 +134,10 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             const searchQuery = String(req.query.q);
 
             textConditions.OR = [
-                { latin: { contains: searchQuery } },
-                { name: { contains: searchQuery } },
+                { species: { contains: searchQuery } },
+                { cultivar: { contains: searchQuery } },
+                { synonym: { contains: searchQuery } },
+                { commonName: { contains: searchQuery } },
             ];
         }
 
@@ -154,6 +174,26 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             ]
         };
         const filteredPlants = await db.plants.findMany({
+            select: {
+                code: true,
+
+                type: true,
+
+                zone: true,
+                native: true,
+                height: true,
+                spread: true,
+                sunTolerance: true,
+
+                genus: true,
+                species: true,
+                cultivar: true,
+                note: true,
+                synonym: true,
+                commonName: true,
+
+                functionalGroup: true,
+            },
             where: allConditions,
             orderBy: {
                 latin: 'asc'
