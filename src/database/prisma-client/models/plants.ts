@@ -45,10 +45,10 @@ export type PlantsMinAggregateOutputType = {
   type: string | null
   zone: string | null
   native: string | null
-  droughtTolerant: boolean | null
-  floodTolerant: boolean | null
   height: number | null
   spread: number | null
+  droughtTolerant: boolean | null
+  floodTolerant: boolean | null
   saltTolerance: string | null
   sunTolerance: string | null
   bloom: string | null
@@ -71,10 +71,10 @@ export type PlantsMaxAggregateOutputType = {
   type: string | null
   zone: string | null
   native: string | null
-  droughtTolerant: boolean | null
-  floodTolerant: boolean | null
   height: number | null
   spread: number | null
+  droughtTolerant: boolean | null
+  floodTolerant: boolean | null
   saltTolerance: string | null
   sunTolerance: string | null
   bloom: string | null
@@ -97,10 +97,10 @@ export type PlantsCountAggregateOutputType = {
   type: number
   zone: number
   native: number
-  droughtTolerant: number
-  floodTolerant: number
   height: number
   spread: number
+  droughtTolerant: number
+  floodTolerant: number
   saltTolerance: number
   sunTolerance: number
   bloom: number
@@ -137,10 +137,10 @@ export type PlantsMinAggregateInputType = {
   type?: true
   zone?: true
   native?: true
-  droughtTolerant?: true
-  floodTolerant?: true
   height?: true
   spread?: true
+  droughtTolerant?: true
+  floodTolerant?: true
   saltTolerance?: true
   sunTolerance?: true
   bloom?: true
@@ -163,10 +163,10 @@ export type PlantsMaxAggregateInputType = {
   type?: true
   zone?: true
   native?: true
-  droughtTolerant?: true
-  floodTolerant?: true
   height?: true
   spread?: true
+  droughtTolerant?: true
+  floodTolerant?: true
   saltTolerance?: true
   sunTolerance?: true
   bloom?: true
@@ -189,10 +189,10 @@ export type PlantsCountAggregateInputType = {
   type?: true
   zone?: true
   native?: true
-  droughtTolerant?: true
-  floodTolerant?: true
   height?: true
   spread?: true
+  droughtTolerant?: true
+  floodTolerant?: true
   saltTolerance?: true
   sunTolerance?: true
   bloom?: true
@@ -302,10 +302,10 @@ export type PlantsGroupByOutputType = {
   type: string | null
   zone: string | null
   native: string | null
-  droughtTolerant: boolean | null
-  floodTolerant: boolean | null
   height: number | null
   spread: number | null
+  droughtTolerant: boolean | null
+  floodTolerant: boolean | null
   saltTolerance: string | null
   sunTolerance: string | null
   bloom: string | null
@@ -351,10 +351,10 @@ export type plantsWhereInput = {
   type?: Prisma.StringNullableFilter<"plants"> | string | null
   zone?: Prisma.StringNullableFilter<"plants"> | string | null
   native?: Prisma.StringNullableFilter<"plants"> | string | null
-  droughtTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
-  floodTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
   height?: Prisma.FloatNullableFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableFilter<"plants"> | number | null
+  droughtTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
+  floodTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
   saltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
   sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
   bloom?: Prisma.StringNullableFilter<"plants"> | string | null
@@ -377,10 +377,10 @@ export type plantsOrderByWithRelationInput = {
   type?: Prisma.SortOrderInput | Prisma.SortOrder
   zone?: Prisma.SortOrderInput | Prisma.SortOrder
   native?: Prisma.SortOrderInput | Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   spread?: Prisma.SortOrderInput | Prisma.SortOrder
+  droughtTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
+  floodTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
   saltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
   sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
   bloom?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -406,10 +406,10 @@ export type plantsWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringNullableFilter<"plants"> | string | null
   zone?: Prisma.StringNullableFilter<"plants"> | string | null
   native?: Prisma.StringNullableFilter<"plants"> | string | null
-  droughtTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
-  floodTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
   height?: Prisma.FloatNullableFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableFilter<"plants"> | number | null
+  droughtTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
+  floodTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
   saltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
   sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
   bloom?: Prisma.StringNullableFilter<"plants"> | string | null
@@ -432,10 +432,10 @@ export type plantsOrderByWithAggregationInput = {
   type?: Prisma.SortOrderInput | Prisma.SortOrder
   zone?: Prisma.SortOrderInput | Prisma.SortOrder
   native?: Prisma.SortOrderInput | Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   spread?: Prisma.SortOrderInput | Prisma.SortOrder
+  droughtTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
+  floodTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
   saltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
   sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
   bloom?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -466,10 +466,10 @@ export type plantsScalarWhereWithAggregatesInput = {
   type?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   zone?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   native?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
-  droughtTolerant?: Prisma.BoolNullableWithAggregatesFilter<"plants"> | boolean | null
-  floodTolerant?: Prisma.BoolNullableWithAggregatesFilter<"plants"> | boolean | null
   height?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
+  droughtTolerant?: Prisma.BoolNullableWithAggregatesFilter<"plants"> | boolean | null
+  floodTolerant?: Prisma.BoolNullableWithAggregatesFilter<"plants"> | boolean | null
   saltTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   sunTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   bloom?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
@@ -491,10 +491,10 @@ export type plantsCreateInput = {
   type?: string | null
   zone?: string | null
   native?: string | null
-  droughtTolerant?: boolean | null
-  floodTolerant?: boolean | null
   height?: number | null
   spread?: number | null
+  droughtTolerant?: boolean | null
+  floodTolerant?: boolean | null
   saltTolerance?: string | null
   sunTolerance?: string | null
   bloom?: string | null
@@ -517,10 +517,10 @@ export type plantsUncheckedCreateInput = {
   type?: string | null
   zone?: string | null
   native?: string | null
-  droughtTolerant?: boolean | null
-  floodTolerant?: boolean | null
   height?: number | null
   spread?: number | null
+  droughtTolerant?: boolean | null
+  floodTolerant?: boolean | null
   saltTolerance?: string | null
   sunTolerance?: string | null
   bloom?: string | null
@@ -542,10 +542,10 @@ export type plantsUpdateInput = {
   type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -568,10 +568,10 @@ export type plantsUncheckedUpdateInput = {
   type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -594,10 +594,10 @@ export type plantsCreateManyInput = {
   type?: string | null
   zone?: string | null
   native?: string | null
-  droughtTolerant?: boolean | null
-  floodTolerant?: boolean | null
   height?: number | null
   spread?: number | null
+  droughtTolerant?: boolean | null
+  floodTolerant?: boolean | null
   saltTolerance?: string | null
   sunTolerance?: string | null
   bloom?: string | null
@@ -619,10 +619,10 @@ export type plantsUpdateManyMutationInput = {
   type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -645,10 +645,10 @@ export type plantsUncheckedUpdateManyInput = {
   type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -671,10 +671,10 @@ export type plantsCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   zone?: Prisma.SortOrder
   native?: Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
+  droughtTolerant?: Prisma.SortOrder
+  floodTolerant?: Prisma.SortOrder
   saltTolerance?: Prisma.SortOrder
   sunTolerance?: Prisma.SortOrder
   bloom?: Prisma.SortOrder
@@ -703,10 +703,10 @@ export type plantsMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   zone?: Prisma.SortOrder
   native?: Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
+  droughtTolerant?: Prisma.SortOrder
+  floodTolerant?: Prisma.SortOrder
   saltTolerance?: Prisma.SortOrder
   sunTolerance?: Prisma.SortOrder
   bloom?: Prisma.SortOrder
@@ -729,10 +729,10 @@ export type plantsMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   zone?: Prisma.SortOrder
   native?: Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
+  droughtTolerant?: Prisma.SortOrder
+  floodTolerant?: Prisma.SortOrder
   saltTolerance?: Prisma.SortOrder
   sunTolerance?: Prisma.SortOrder
   bloom?: Prisma.SortOrder
@@ -761,16 +761,16 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type NullableBoolFieldUpdateOperationsInput = {
-  set?: boolean | null
-}
-
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -791,10 +791,10 @@ export type plantsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   type?: boolean
   zone?: boolean
   native?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
   height?: boolean
   spread?: boolean
+  droughtTolerant?: boolean
+  floodTolerant?: boolean
   saltTolerance?: boolean
   sunTolerance?: boolean
   bloom?: boolean
@@ -817,10 +817,10 @@ export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   type?: boolean
   zone?: boolean
   native?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
   height?: boolean
   spread?: boolean
+  droughtTolerant?: boolean
+  floodTolerant?: boolean
   saltTolerance?: boolean
   sunTolerance?: boolean
   bloom?: boolean
@@ -843,10 +843,10 @@ export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   type?: boolean
   zone?: boolean
   native?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
   height?: boolean
   spread?: boolean
+  droughtTolerant?: boolean
+  floodTolerant?: boolean
   saltTolerance?: boolean
   sunTolerance?: boolean
   bloom?: boolean
@@ -869,10 +869,10 @@ export type plantsSelectScalar = {
   type?: boolean
   zone?: boolean
   native?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
   height?: boolean
   spread?: boolean
+  droughtTolerant?: boolean
+  floodTolerant?: boolean
   saltTolerance?: boolean
   sunTolerance?: boolean
   bloom?: boolean
@@ -887,7 +887,7 @@ export type plantsSelectScalar = {
   vascanID?: boolean
 }
 
-export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "latin" | "name" | "type" | "zone" | "native" | "droughtTolerant" | "floodTolerant" | "height" | "spread" | "saltTolerance" | "sunTolerance" | "bloom" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "functionalGroup" | "vascanID", ExtArgs["result"]["plants"]>
+export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "latin" | "name" | "type" | "zone" | "native" | "height" | "spread" | "droughtTolerant" | "floodTolerant" | "saltTolerance" | "sunTolerance" | "bloom" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "functionalGroup" | "vascanID", ExtArgs["result"]["plants"]>
 
 export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "plants"
@@ -900,10 +900,10 @@ export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     type: string | null
     zone: string | null
     native: string | null
-    droughtTolerant: boolean | null
-    floodTolerant: boolean | null
     height: number | null
     spread: number | null
+    droughtTolerant: boolean | null
+    floodTolerant: boolean | null
     saltTolerance: string | null
     sunTolerance: string | null
     bloom: string | null
@@ -1346,10 +1346,10 @@ export interface plantsFieldRefs {
   readonly type: Prisma.FieldRef<"plants", 'String'>
   readonly zone: Prisma.FieldRef<"plants", 'String'>
   readonly native: Prisma.FieldRef<"plants", 'String'>
-  readonly droughtTolerant: Prisma.FieldRef<"plants", 'Boolean'>
-  readonly floodTolerant: Prisma.FieldRef<"plants", 'Boolean'>
   readonly height: Prisma.FieldRef<"plants", 'Float'>
   readonly spread: Prisma.FieldRef<"plants", 'Float'>
+  readonly droughtTolerant: Prisma.FieldRef<"plants", 'Boolean'>
+  readonly floodTolerant: Prisma.FieldRef<"plants", 'Boolean'>
   readonly saltTolerance: Prisma.FieldRef<"plants", 'String'>
   readonly sunTolerance: Prisma.FieldRef<"plants", 'String'>
   readonly bloom: Prisma.FieldRef<"plants", 'String'>

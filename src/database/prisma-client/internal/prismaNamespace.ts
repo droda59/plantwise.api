@@ -532,10 +532,10 @@ export const PlantsScalarFieldEnum = {
   type: 'type',
   zone: 'zone',
   native: 'native',
-  droughtTolerant: 'droughtTolerant',
-  floodTolerant: 'floodTolerant',
   height: 'height',
   spread: 'spread',
+  droughtTolerant: 'droughtTolerant',
+  floodTolerant: 'floodTolerant',
   saltTolerance: 'saltTolerance',
   sunTolerance: 'sunTolerance',
   bloom: 'bloom',
@@ -590,16 +590,16 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'Boolean'
+ * Reference to a field of type 'Float'
  */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'Boolean'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 /**
