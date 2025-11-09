@@ -547,7 +547,8 @@ export const PlantsScalarFieldEnum = {
   synonym: 'synonym',
   commonName: 'commonName',
   functionalGroup: 'functionalGroup',
-  vascanID: 'vascanID'
+  vascanID: 'vascanID',
+  urlJardin2M: 'urlJardin2M'
 } as const
 
 export type PlantsScalarFieldEnum = (typeof PlantsScalarFieldEnum)[keyof typeof PlantsScalarFieldEnum]

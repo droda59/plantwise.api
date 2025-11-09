@@ -61,6 +61,7 @@ export type PlantsMinAggregateOutputType = {
   commonName: string | null
   functionalGroup: string | null
   vascanID: string | null
+  urlJardin2M: string | null
 }
 
 export type PlantsMaxAggregateOutputType = {
@@ -87,6 +88,7 @@ export type PlantsMaxAggregateOutputType = {
   commonName: string | null
   functionalGroup: string | null
   vascanID: string | null
+  urlJardin2M: string | null
 }
 
 export type PlantsCountAggregateOutputType = {
@@ -113,6 +115,7 @@ export type PlantsCountAggregateOutputType = {
   commonName: number
   functionalGroup: number
   vascanID: number
+  urlJardin2M: number
   _all: number
 }
 
@@ -153,6 +156,7 @@ export type PlantsMinAggregateInputType = {
   commonName?: true
   functionalGroup?: true
   vascanID?: true
+  urlJardin2M?: true
 }
 
 export type PlantsMaxAggregateInputType = {
@@ -179,6 +183,7 @@ export type PlantsMaxAggregateInputType = {
   commonName?: true
   functionalGroup?: true
   vascanID?: true
+  urlJardin2M?: true
 }
 
 export type PlantsCountAggregateInputType = {
@@ -205,6 +210,7 @@ export type PlantsCountAggregateInputType = {
   commonName?: true
   functionalGroup?: true
   vascanID?: true
+  urlJardin2M?: true
   _all?: true
 }
 
@@ -318,6 +324,7 @@ export type PlantsGroupByOutputType = {
   commonName: string | null
   functionalGroup: string | null
   vascanID: string | null
+  urlJardin2M: string | null
   _count: PlantsCountAggregateOutputType | null
   _avg: PlantsAvgAggregateOutputType | null
   _sum: PlantsSumAggregateOutputType | null
@@ -367,6 +374,7 @@ export type plantsWhereInput = {
   commonName?: Prisma.StringNullableFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableFilter<"plants"> | string | null
   vascanID?: Prisma.StringNullableFilter<"plants"> | string | null
+  urlJardin2M?: Prisma.StringNullableFilter<"plants"> | string | null
 }
 
 export type plantsOrderByWithRelationInput = {
@@ -393,6 +401,7 @@ export type plantsOrderByWithRelationInput = {
   commonName?: Prisma.SortOrderInput | Prisma.SortOrder
   functionalGroup?: Prisma.SortOrderInput | Prisma.SortOrder
   vascanID?: Prisma.SortOrderInput | Prisma.SortOrder
+  urlJardin2M?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type plantsWhereUniqueInput = Prisma.AtLeast<{
@@ -422,6 +431,7 @@ export type plantsWhereUniqueInput = Prisma.AtLeast<{
   commonName?: Prisma.StringNullableFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableFilter<"plants"> | string | null
   vascanID?: Prisma.StringNullableFilter<"plants"> | string | null
+  urlJardin2M?: Prisma.StringNullableFilter<"plants"> | string | null
 }, "id" | "code">
 
 export type plantsOrderByWithAggregationInput = {
@@ -448,6 +458,7 @@ export type plantsOrderByWithAggregationInput = {
   commonName?: Prisma.SortOrderInput | Prisma.SortOrder
   functionalGroup?: Prisma.SortOrderInput | Prisma.SortOrder
   vascanID?: Prisma.SortOrderInput | Prisma.SortOrder
+  urlJardin2M?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.plantsCountOrderByAggregateInput
   _avg?: Prisma.plantsAvgOrderByAggregateInput
   _max?: Prisma.plantsMaxOrderByAggregateInput
@@ -482,6 +493,7 @@ export type plantsScalarWhereWithAggregatesInput = {
   commonName?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   vascanID?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  urlJardin2M?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
 }
 
 export type plantsCreateInput = {
@@ -507,6 +519,7 @@ export type plantsCreateInput = {
   commonName?: string | null
   functionalGroup?: string | null
   vascanID?: string | null
+  urlJardin2M?: string | null
 }
 
 export type plantsUncheckedCreateInput = {
@@ -533,6 +546,7 @@ export type plantsUncheckedCreateInput = {
   commonName?: string | null
   functionalGroup?: string | null
   vascanID?: string | null
+  urlJardin2M?: string | null
 }
 
 export type plantsUpdateInput = {
@@ -558,6 +572,7 @@ export type plantsUpdateInput = {
   commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsUncheckedUpdateInput = {
@@ -584,6 +599,7 @@ export type plantsUncheckedUpdateInput = {
   commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsCreateManyInput = {
@@ -610,6 +626,7 @@ export type plantsCreateManyInput = {
   commonName?: string | null
   functionalGroup?: string | null
   vascanID?: string | null
+  urlJardin2M?: string | null
 }
 
 export type plantsUpdateManyMutationInput = {
@@ -635,6 +652,7 @@ export type plantsUpdateManyMutationInput = {
   commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsUncheckedUpdateManyInput = {
@@ -661,6 +679,7 @@ export type plantsUncheckedUpdateManyInput = {
   commonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsCountOrderByAggregateInput = {
@@ -687,6 +706,7 @@ export type plantsCountOrderByAggregateInput = {
   commonName?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
   vascanID?: Prisma.SortOrder
+  urlJardin2M?: Prisma.SortOrder
 }
 
 export type plantsAvgOrderByAggregateInput = {
@@ -719,6 +739,7 @@ export type plantsMaxOrderByAggregateInput = {
   commonName?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
   vascanID?: Prisma.SortOrder
+  urlJardin2M?: Prisma.SortOrder
 }
 
 export type plantsMinOrderByAggregateInput = {
@@ -745,6 +766,7 @@ export type plantsMinOrderByAggregateInput = {
   commonName?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
   vascanID?: Prisma.SortOrder
+  urlJardin2M?: Prisma.SortOrder
 }
 
 export type plantsSumOrderByAggregateInput = {
@@ -807,6 +829,7 @@ export type plantsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   commonName?: boolean
   functionalGroup?: boolean
   vascanID?: boolean
+  urlJardin2M?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -833,6 +856,7 @@ export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   commonName?: boolean
   functionalGroup?: boolean
   vascanID?: boolean
+  urlJardin2M?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -859,6 +883,7 @@ export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   commonName?: boolean
   functionalGroup?: boolean
   vascanID?: boolean
+  urlJardin2M?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectScalar = {
@@ -885,9 +910,10 @@ export type plantsSelectScalar = {
   commonName?: boolean
   functionalGroup?: boolean
   vascanID?: boolean
+  urlJardin2M?: boolean
 }
 
-export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "latin" | "name" | "type" | "zone" | "native" | "height" | "spread" | "droughtTolerant" | "floodTolerant" | "saltTolerance" | "sunTolerance" | "bloom" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "functionalGroup" | "vascanID", ExtArgs["result"]["plants"]>
+export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "latin" | "name" | "type" | "zone" | "native" | "height" | "spread" | "droughtTolerant" | "floodTolerant" | "saltTolerance" | "sunTolerance" | "bloom" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "functionalGroup" | "vascanID" | "urlJardin2M", ExtArgs["result"]["plants"]>
 
 export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "plants"
@@ -916,6 +942,7 @@ export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     commonName: string | null
     functionalGroup: string | null
     vascanID: string | null
+    urlJardin2M: string | null
   }, ExtArgs["result"]["plants"]>
   composites: {}
 }
@@ -1362,6 +1389,7 @@ export interface plantsFieldRefs {
   readonly commonName: Prisma.FieldRef<"plants", 'String'>
   readonly functionalGroup: Prisma.FieldRef<"plants", 'String'>
   readonly vascanID: Prisma.FieldRef<"plants", 'String'>
+  readonly urlJardin2M: Prisma.FieldRef<"plants", 'String'>
 }
     
 

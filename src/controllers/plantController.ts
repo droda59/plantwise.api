@@ -51,6 +51,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
                     vascanID: cleanup(r['ID vascan']),
+                    urlJardin2M: cleanup(r['Lien J2M']),
                 };
                 return p;
             };
@@ -115,6 +116,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
             functionalGroup: p.functionalGroup,
             vascanID: p.vascanID,
+            urlJardin2M: p.urlJardin2M,
         }));
         const filteredPlants = await db.plants.createMany({
             data: rows,

@@ -27,5 +27,7 @@ export interface Plant {
     commonName?: string;
 
     functionalGroup?: string;
+
     vascanID?: string;
+    urlJardin2M?: string;
 }

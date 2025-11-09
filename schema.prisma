@@ -39,4 +39,5 @@ model plants {
   functionalGroup String?
 
   vascanID        String?
+  urlJardin2M     String?
 }
