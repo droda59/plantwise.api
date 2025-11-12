@@ -138,6 +138,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             textConditions.OR = [
                 { species: { contains: searchQuery } },
                 { cultivar: { contains: searchQuery } },
+                { note: { contains: searchQuery } },
                 { synonym: { contains: searchQuery } },
                 { commonName: { contains: searchQuery } },
             ];
