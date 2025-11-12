@@ -17,10 +17,10 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             const toPlant = (r: any) => {
                 const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
 
-                const fullSun = cleanup(r['Ensoleillement plein soleil']) === 'm';
-                const sunShade = cleanup(r['Ensoleillement soleil-mi-ombre']) === 's';
-                const partialShade = cleanup(r['Ensoleillement mi-ombre']) === 'w';
-                const shade = cleanup(r['Ensoleillement ombre']) === 'l';
+                const fullSun = cleanup(r['Ensoleillement plein soleil']).length > 0;
+                const sunShade = cleanup(r['Ensoleillement soleil-mi-ombre']).length > 0;
+                const partialShade = cleanup(r['Ensoleillement mi-ombre']).length > 0;
+                const shade = cleanup(r['Ensoleillement ombre']).length > 0;
 
                 const suns: ('full' | 'partial' | 'shade')[] = [];
                 if (fullSun || sunShade) suns.push('full');
