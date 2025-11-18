@@ -150,7 +150,13 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.native) conditions.native = 'i';
         if (req.query.droughtTolerant) conditions.droughtTolerant = true;
         if (req.query.floodTolerant) conditions.floodTolerant = true;
-        if (req.query.sun) conditions.sunTolerance = { contains: String(req.query.sun) };
+
+        const sunConditions: plantsWhereInput = {};
+        if (req.query.sun) {
+            sunConditions.OR = String(req.query.sun).split(',').map(c => (
+                { sunTolerance: { contains: c } }
+            ));
+        }
         if (req.query.bloom) conditions.bloom = { contains: String(req.query.bloom) };
 
         const heightConditions = {} as FloatNullableFilter<never>;
@@ -173,6 +179,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         const allConditions: plantsWhereInput = {
             AND: [
                 textConditions,
+                sunConditions,
                 conditions,
             ]
         };
