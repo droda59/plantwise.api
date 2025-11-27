@@ -29,17 +29,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
                 const p: Plant = {
                     code: cleanup(r['CODE']),
-
-                    name: cleanup(r['Nom commun']) || '',
-                    latin: cleanup(r['Nom BOTANIQUE']) || '',
                     type: cleanup(r['Type']) || '',
-
-                    zone: cleanup(r['Zone']) || undefined,
-                    native: cleanup(r['indig/nat']),
-                    height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
-                    spread: Number(cleanup(r['L'])) || undefined,
-                    sunTolerance: suns.join(','),
-                    bloom: cleanup(r['Flor']) || undefined,
 
                     family: cleanup(r['Famille']),
                     genus: cleanup(r['Genre']),
@@ -49,7 +39,16 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     synonym: cleanup(r['Synonyme']),
                     commonName: cleanup(r['Nom vernaculaire']),
 
+                    zone: cleanup(r['Zone']) || undefined,
+                    native: cleanup(r['indig/nat']),
+                    height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
+                    spread: Number(cleanup(r['L'])) || undefined,
+                    sunTolerance: suns.join(','),
+                    bloom: cleanup(r['Flor']) || undefined,
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
+
+                    remarks: cleanup(r['Remarques']),
+
                     vascanID: cleanup(r['ID vascan']),
                     urlJardin2M: cleanup(r['Lien J2M']),
                 };
@@ -91,10 +90,15 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
         const rows = newRows.map(p => ({
             code: p.code,
-
-            latin: p.latin,
-            name: p.name,
             type: p.type,
+
+            family: p.family,
+            genus: p.genus,
+            species: p.species,
+            cultivar: p.cultivar,
+            note: p.note,
+            synonym: p.synonym,
+            commonName: p.commonName,
 
             zone: p.zone,
             native: p.native,
@@ -105,16 +109,10 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             saltTolerance: p.saltTolerance,
             sunTolerance: p.sunTolerance,
             bloom: p.bloom,
-
-            family: p.family,
-            genus: p.genus,
-            species: p.species,
-            cultivar: p.cultivar,
-            note: p.note,
-            synonym: p.synonym,
-            commonName: p.commonName,
-
             functionalGroup: p.functionalGroup,
+
+            remarks: p.remarks,
+
             vascanID: p.vascanID,
             urlJardin2M: p.urlJardin2M,
         }));
@@ -186,14 +184,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         const filteredPlants = await db.plants.findMany({
             select: {
                 code: true,
-
                 type: true,
-
-                zone: true,
-                native: true,
-                height: true,
-                spread: true,
-                sunTolerance: true,
 
                 genus: true,
                 species: true,
@@ -202,11 +193,16 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 synonym: true,
                 commonName: true,
 
+                zone: true,
+                native: true,
+                height: true,
+                spread: true,
+                sunTolerance: true,
                 functionalGroup: true,
             },
             where: allConditions,
             orderBy: {
-                latin: 'asc'
+                genus: 'asc'
             }
         });
 
@@ -235,9 +231,12 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
         const createdItem = await db.plants.create({
             data: {
                 code: req.body.code,
-                latin: req.body.latin,
-                name: req.body.name,
                 type: req.body.type || undefined,
+
+                family: req.body.family || undefined,
+                genus: req.body.genus || undefined,
+                species: req.body.species || undefined,
+
                 zone: req.body.zone || undefined,
                 bloom: req.body.bloom || undefined,
                 sunTolerance: req.body.sunTolerance || undefined,
@@ -247,9 +246,6 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
                 height: req.body.height || undefined,
                 spread: req.body.spread || undefined,
                 saltTolerance: req.body.saltTolerance || undefined,
-                family: req.body.family || undefined,
-                genus: req.body.genus || undefined,
-                species: req.body.species || undefined,
                 functionalGroup: req.body.functionalGroup || undefined,
             }
         });

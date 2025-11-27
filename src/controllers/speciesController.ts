@@ -34,7 +34,7 @@ const getPlantsBySpecies = async (req: Request, res: Response, next: NextFunctio
         const plantsList = await db.plants.findMany({
             where: { species: req.query.species as string },
             orderBy: {
-                latin: 'asc'
+                genus: 'asc'
             }
         });
 

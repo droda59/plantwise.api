@@ -3,10 +3,15 @@ type PlantTypeValue = '1 AR' | '1b ARB' | '2 CON' | '3 ARBU' | '4 VIV' | '5 GRAM
 export interface Plant {
     id?: number;
     code: string;
-
-    latin: string;
-    name: string;
     type: PlantTypeValue;
+
+    family?: string;
+    genus?: string;
+    species?: string;
+    cultivar?: string;
+    note?: string;
+    synonym?: string;
+    commonName?: string;
 
     zone?: string;
     native?: string;
@@ -17,16 +22,9 @@ export interface Plant {
     saltTolerance?: 'haute' | 'moyenne' | 'faible';
     sunTolerance?: string;
     bloom?: string;
-
-    family?: string;
-    genus?: string;
-    species?: string;
-    cultivar?: string;
-    note?: string;
-    synonym?: string;
-    commonName?: string;
-
     functionalGroup?: string;
+
+    remarks?: string;
 
     vascanID?: string;
     urlJardin2M?: string;
