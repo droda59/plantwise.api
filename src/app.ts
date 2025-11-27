@@ -2,6 +2,7 @@ import express, { NextFunction } from 'express';
 import cors from 'cors';
 
 import plantRoutes from './routes/plantRoutes';
+import groupRoutes from './routes/groupRoutes';
 import genusRoutes from './routes/genusRoutes';
 import speciesRoutes from './routes/speciesRoutes';
 import { errorHandler } from './middlewares/errorHandler';
@@ -35,6 +36,7 @@ app.use(errorHandler);
 
 // Routes
 app.use('/api/plants', plantRoutes);
+app.use('/api/group', groupRoutes);
 app.use('/api/genus', genusRoutes);
 app.use('/api/species', speciesRoutes);
 
