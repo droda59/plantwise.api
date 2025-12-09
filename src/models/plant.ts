@@ -17,12 +17,23 @@ export interface Plant {
     native?: string;
     height?: number; // m (approx)
     spread?: number; // m (approx)
+    plantationDistance?: number; // m (approx)
+
     sunTolerance?: string;
+    soilHumidity?: string;
+    soilRichness?: string;
+    soilStructure?: string;
+    groundSaltTolerance?: string;
+    airSaltTolerance?: string;
+    soilAcidity?: string;
+
     bloom?: string;
     functionalGroup?: string;
+    grouping?: string;
 
     remarks?: string;
 
     vascanID?: string;
-    urlJardin2M?: string;
+    hydroID?: string;
+    referenceUrl?: string;
 }

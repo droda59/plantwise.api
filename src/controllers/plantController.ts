@@ -59,10 +59,25 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     return undefined;
                 }
 
-                const suns: ('full' | 'partial' | 'shade')[] = [];
+                const suns = [];
                 if (cleanup(r['soleil']).length > 0) suns.push('full');
                 if (cleanup(r['mi-ombre']).length > 0) suns.push('partial');
                 if (cleanup(r['ombre']).length > 0) suns.push('shade');
+
+                const soilHumidity = [];
+                if (cleanup(r['sec']).length > 0) soilHumidity.push('dry');
+                if (cleanup(r['normal']).length > 0) soilHumidity.push('regular');
+                if (cleanup(r['humide']).length > 0) soilHumidity.push('wet');
+
+                const soilRichness = [];
+                if (cleanup(r['Sol pauvre']).length > 0) soilRichness.push('poor');
+                if (cleanup(r['Sol normal']).length > 0) soilRichness.push('regular');
+                if (cleanup(r['Sol riche']).length > 0) soilRichness.push('rich');
+
+                const soilStructure = [];
+                if (cleanup(r['Sol sablonneux']).length > 0) soilStructure.push('sandy');
+                if (cleanup(r['Sol meuble']).length > 0) soilStructure.push('regular');
+                if (cleanup(r['Sol lourd']).length > 0) soilStructure.push('heavy');
 
                 const p: Plant = {
                     code,
@@ -78,17 +93,27 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
 
                     height: Number(cleanup(r['Hauteur'])) || undefined,
                     spread: Number(cleanup(r['Largeur'])) || undefined,
+                    plantationDistance: Number(cleanup(r['Distance de plantation HQ'])) || undefined,
 
                     zone: cleanup(r['Zone']) || undefined,
                     native: cleanup(r['indigène']),
                     sunTolerance: suns.join(','),
-                    bloom: cleanup(r['Floraison']) || undefined,
+                    soilHumidity: soilHumidity.join(','),
+                    soilRichness: soilRichness.join(','),
+                    soilStructure: soilStructure.join(','),
+                    groundSaltTolerance: cleanup(r['Sels déglaçage']),
+                    airSaltTolerance: cleanup(r['Embruns salins']),
+                    soilAcidity: cleanup(r['Acidité du sol']),
+
+                    bloom: cleanup(r['Floraison']),
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
+                    grouping: cleanup(r['Caractéristique']),
 
                     remarks: cleanup(r['Remarques']),
 
                     vascanID: cleanup(r['ID vascan']),
-                    urlJardin2M: cleanup(r['Lien pépinière']),
+                    hydroID: cleanup(r['ID HQ']),
+                    referenceUrl: cleanup(r['Lien pépinière']),
                 };
                 return p;
             };
@@ -115,18 +140,29 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             synonym: p.synonym,
             commonName: p.commonName,
 
-            zone: p.zone,
-            native: p.native,
             height: p.height,
             spread: p.spread,
+            plantationDistance: p.plantationDistance,
+
+            zone: p.zone,
+            native: p.native,
             sunTolerance: p.sunTolerance,
+            soilHumidity: p.soilHumidity,
+            soilRichness: p.soilRichness,
+            soilStructure: p.soilStructure,
+            groundSaltTolerance: p.groundSaltTolerance,
+            airSaltTolerance: p.airSaltTolerance,
+            soilAcidity: p.soilAcidity,
+
             bloom: p.bloom,
             functionalGroup: p.functionalGroup,
+            grouping: p.grouping,
 
             remarks: p.remarks,
 
             vascanID: p.vascanID,
-            referenceUrl: p.urlJardin2M,
+            hydroID: p.hydroID,
+            referenceUrl: p.referenceUrl,
         }));
         const filteredPlants = await db.plants.createMany({
             data: rows,

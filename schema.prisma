@@ -29,12 +29,13 @@ model plants {
   spread          Float?
   plantationDistance    Float?
   
+  sunTolerance    String?
   groundSaltTolerance   String?
   airSaltTolerance      String?
-  soilHumidity     String?
-  soilRichness     String?
-  soilAcidity      String?
-  sunTolerance    String?
+  soilHumidity    String?
+  soilRichness    String?
+  soilStructure   String?
+  soilAcidity     String?
 
   bloom           String?
   functionalGroup String?
