@@ -214,6 +214,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         conditions.spread = spreadConditions;
 
         if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
+        if (req.query.grouping) conditions.grouping = String(req.query.grouping);
 
         if (req.query.genus) conditions.genus = String(req.query.genus);
         if (req.query.species) conditions.species = String(req.query.species);
@@ -243,6 +244,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 spread: true,
                 sunTolerance: true,
                 functionalGroup: true,
+                grouping: true,
             },
             where: allConditions,
             orderBy: {
@@ -268,7 +270,6 @@ const getItemByCode = async (req: Request, res: Response, next: NextFunction) =>
         next(error);
     }
 };
-
 
 const createItem = async (req: Request, res: Response, next: NextFunction) => {
     try {
