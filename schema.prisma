@@ -27,15 +27,22 @@ model plants {
   native          String?
   height          Float?
   spread          Float?
-  droughtTolerant Boolean?
-  floodTolerant   Boolean?
-  saltTolerance   String?
+  plantationDistance    Float?
+  
+  groundSaltTolerance   String?
+  airSaltTolerance      String?
+  soilHumidity     String?
+  soilRichness     String?
+  soilAcidity      String?
   sunTolerance    String?
+
   bloom           String?
   functionalGroup String?
+  grouping        String?
 
   remarks         String?
 
   vascanID        String?
-  urlJardin2M     String?
+  hydroID         String?
+  referenceUrl    String?
 }

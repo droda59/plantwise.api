@@ -17,9 +17,6 @@ export interface Plant {
     native?: string;
     height?: number; // m (approx)
     spread?: number; // m (approx)
-    droughtTolerant?: boolean;
-    floodTolerant?: boolean;
-    saltTolerance?: 'haute' | 'moyenne' | 'faible';
     sunTolerance?: string;
     bloom?: string;
     functionalGroup?: string;

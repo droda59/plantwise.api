@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse';
-import XLSX, { read } from 'xlsx';
+import XLSX from 'xlsx';
 
 import db from '../database/dbConnection';
 import { FloatNullableFilter, plantsWhereInput } from '../database/prisma-client/models';
@@ -102,7 +102,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
         convertXlsxToCsv(fileName);
         const fileData = await readCSV(`../data/${fileName}.csv`);
         const newRows = sanitizePlants(fileData as any[]);
-        console.log('newRows', newRows.filter(r => !r.code));
 
         const rows = newRows.map(p => ({
             code: p.code,
@@ -120,9 +119,6 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             native: p.native,
             height: p.height,
             spread: p.spread,
-            droughtTolerant: p.droughtTolerant,
-            floodTolerant: p.floodTolerant,
-            saltTolerance: p.saltTolerance,
             sunTolerance: p.sunTolerance,
             bloom: p.bloom,
             functionalGroup: p.functionalGroup,
@@ -130,7 +126,7 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
             remarks: p.remarks,
 
             vascanID: p.vascanID,
-            urlJardin2M: p.urlJardin2M,
+            referenceUrl: p.urlJardin2M,
         }));
         const filteredPlants = await db.plants.createMany({
             data: rows,
@@ -162,8 +158,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.type) conditions.type = String(req.query.type);
         if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) };
         if (req.query.native) conditions.native = 'i';
-        if (req.query.droughtTolerant) conditions.droughtTolerant = true;
-        if (req.query.floodTolerant) conditions.floodTolerant = true;
 
         const sunConditions: plantsWhereInput = {};
         if (req.query.sun) {
@@ -182,8 +176,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         if (req.query.spreadMin) spreadConditions.gte = toInt(req.query.spreadMin);
         if (req.query.spreadMax) spreadConditions.lte = toInt(req.query.spreadMax);
         conditions.spread = spreadConditions;
-
-        if (req.query.floodTolerant) conditions.floodTolerant = true;
 
         if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
 
@@ -257,11 +249,8 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
                 bloom: req.body.bloom || undefined,
                 sunTolerance: req.body.sunTolerance || undefined,
                 native: req.body.native || undefined,
-                droughtTolerant: req.body.droughtTolerant || undefined,
-                floodTolerant: req.body.floodTolerant || undefined,
                 height: req.body.height || undefined,
                 spread: req.body.spread || undefined,
-                saltTolerance: req.body.saltTolerance || undefined,
                 functionalGroup: req.body.functionalGroup || undefined,
             }
         });

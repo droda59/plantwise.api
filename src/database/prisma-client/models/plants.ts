@@ -30,12 +30,14 @@ export type PlantsAvgAggregateOutputType = {
   id: number | null
   height: number | null
   spread: number | null
+  plantationDistance: number | null
 }
 
 export type PlantsSumAggregateOutputType = {
   id: number | null
   height: number | null
   spread: number | null
+  plantationDistance: number | null
 }
 
 export type PlantsMinAggregateOutputType = {
@@ -53,15 +55,20 @@ export type PlantsMinAggregateOutputType = {
   native: string | null
   height: number | null
   spread: number | null
-  droughtTolerant: boolean | null
-  floodTolerant: boolean | null
-  saltTolerance: string | null
+  plantationDistance: number | null
+  groundSaltTolerance: string | null
+  airSaltTolerance: string | null
+  soilHumidity: string | null
+  soilRichness: string | null
+  soilAcidity: string | null
   sunTolerance: string | null
   bloom: string | null
   functionalGroup: string | null
+  grouping: string | null
   remarks: string | null
   vascanID: string | null
-  urlJardin2M: string | null
+  hydroID: string | null
+  referenceUrl: string | null
 }
 
 export type PlantsMaxAggregateOutputType = {
@@ -79,15 +86,20 @@ export type PlantsMaxAggregateOutputType = {
   native: string | null
   height: number | null
   spread: number | null
-  droughtTolerant: boolean | null
-  floodTolerant: boolean | null
-  saltTolerance: string | null
+  plantationDistance: number | null
+  groundSaltTolerance: string | null
+  airSaltTolerance: string | null
+  soilHumidity: string | null
+  soilRichness: string | null
+  soilAcidity: string | null
   sunTolerance: string | null
   bloom: string | null
   functionalGroup: string | null
+  grouping: string | null
   remarks: string | null
   vascanID: string | null
-  urlJardin2M: string | null
+  hydroID: string | null
+  referenceUrl: string | null
 }
 
 export type PlantsCountAggregateOutputType = {
@@ -105,15 +117,20 @@ export type PlantsCountAggregateOutputType = {
   native: number
   height: number
   spread: number
-  droughtTolerant: number
-  floodTolerant: number
-  saltTolerance: number
+  plantationDistance: number
+  groundSaltTolerance: number
+  airSaltTolerance: number
+  soilHumidity: number
+  soilRichness: number
+  soilAcidity: number
   sunTolerance: number
   bloom: number
   functionalGroup: number
+  grouping: number
   remarks: number
   vascanID: number
-  urlJardin2M: number
+  hydroID: number
+  referenceUrl: number
   _all: number
 }
 
@@ -122,12 +139,14 @@ export type PlantsAvgAggregateInputType = {
   id?: true
   height?: true
   spread?: true
+  plantationDistance?: true
 }
 
 export type PlantsSumAggregateInputType = {
   id?: true
   height?: true
   spread?: true
+  plantationDistance?: true
 }
 
 export type PlantsMinAggregateInputType = {
@@ -145,15 +164,20 @@ export type PlantsMinAggregateInputType = {
   native?: true
   height?: true
   spread?: true
-  droughtTolerant?: true
-  floodTolerant?: true
-  saltTolerance?: true
+  plantationDistance?: true
+  groundSaltTolerance?: true
+  airSaltTolerance?: true
+  soilHumidity?: true
+  soilRichness?: true
+  soilAcidity?: true
   sunTolerance?: true
   bloom?: true
   functionalGroup?: true
+  grouping?: true
   remarks?: true
   vascanID?: true
-  urlJardin2M?: true
+  hydroID?: true
+  referenceUrl?: true
 }
 
 export type PlantsMaxAggregateInputType = {
@@ -171,15 +195,20 @@ export type PlantsMaxAggregateInputType = {
   native?: true
   height?: true
   spread?: true
-  droughtTolerant?: true
-  floodTolerant?: true
-  saltTolerance?: true
+  plantationDistance?: true
+  groundSaltTolerance?: true
+  airSaltTolerance?: true
+  soilHumidity?: true
+  soilRichness?: true
+  soilAcidity?: true
   sunTolerance?: true
   bloom?: true
   functionalGroup?: true
+  grouping?: true
   remarks?: true
   vascanID?: true
-  urlJardin2M?: true
+  hydroID?: true
+  referenceUrl?: true
 }
 
 export type PlantsCountAggregateInputType = {
@@ -197,15 +226,20 @@ export type PlantsCountAggregateInputType = {
   native?: true
   height?: true
   spread?: true
-  droughtTolerant?: true
-  floodTolerant?: true
-  saltTolerance?: true
+  plantationDistance?: true
+  groundSaltTolerance?: true
+  airSaltTolerance?: true
+  soilHumidity?: true
+  soilRichness?: true
+  soilAcidity?: true
   sunTolerance?: true
   bloom?: true
   functionalGroup?: true
+  grouping?: true
   remarks?: true
   vascanID?: true
-  urlJardin2M?: true
+  hydroID?: true
+  referenceUrl?: true
   _all?: true
 }
 
@@ -310,15 +344,20 @@ export type PlantsGroupByOutputType = {
   native: string | null
   height: number | null
   spread: number | null
-  droughtTolerant: boolean | null
-  floodTolerant: boolean | null
-  saltTolerance: string | null
+  plantationDistance: number | null
+  groundSaltTolerance: string | null
+  airSaltTolerance: string | null
+  soilHumidity: string | null
+  soilRichness: string | null
+  soilAcidity: string | null
   sunTolerance: string | null
   bloom: string | null
   functionalGroup: string | null
+  grouping: string | null
   remarks: string | null
   vascanID: string | null
-  urlJardin2M: string | null
+  hydroID: string | null
+  referenceUrl: string | null
   _count: PlantsCountAggregateOutputType | null
   _avg: PlantsAvgAggregateOutputType | null
   _sum: PlantsSumAggregateOutputType | null
@@ -359,15 +398,20 @@ export type plantsWhereInput = {
   native?: Prisma.StringNullableFilter<"plants"> | string | null
   height?: Prisma.FloatNullableFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableFilter<"plants"> | number | null
-  droughtTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
-  floodTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
-  saltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  plantationDistance?: Prisma.FloatNullableFilter<"plants"> | number | null
+  groundSaltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  airSaltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  soilHumidity?: Prisma.StringNullableFilter<"plants"> | string | null
+  soilRichness?: Prisma.StringNullableFilter<"plants"> | string | null
+  soilAcidity?: Prisma.StringNullableFilter<"plants"> | string | null
   sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
   bloom?: Prisma.StringNullableFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableFilter<"plants"> | string | null
+  grouping?: Prisma.StringNullableFilter<"plants"> | string | null
   remarks?: Prisma.StringNullableFilter<"plants"> | string | null
   vascanID?: Prisma.StringNullableFilter<"plants"> | string | null
-  urlJardin2M?: Prisma.StringNullableFilter<"plants"> | string | null
+  hydroID?: Prisma.StringNullableFilter<"plants"> | string | null
+  referenceUrl?: Prisma.StringNullableFilter<"plants"> | string | null
 }
 
 export type plantsOrderByWithRelationInput = {
@@ -385,15 +429,20 @@ export type plantsOrderByWithRelationInput = {
   native?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   spread?: Prisma.SortOrderInput | Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
-  saltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrderInput | Prisma.SortOrder
+  groundSaltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  airSaltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  soilHumidity?: Prisma.SortOrderInput | Prisma.SortOrder
+  soilRichness?: Prisma.SortOrderInput | Prisma.SortOrder
+  soilAcidity?: Prisma.SortOrderInput | Prisma.SortOrder
   sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
   bloom?: Prisma.SortOrderInput | Prisma.SortOrder
   functionalGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  grouping?: Prisma.SortOrderInput | Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   vascanID?: Prisma.SortOrderInput | Prisma.SortOrder
-  urlJardin2M?: Prisma.SortOrderInput | Prisma.SortOrder
+  hydroID?: Prisma.SortOrderInput | Prisma.SortOrder
+  referenceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type plantsWhereUniqueInput = Prisma.AtLeast<{
@@ -414,15 +463,20 @@ export type plantsWhereUniqueInput = Prisma.AtLeast<{
   native?: Prisma.StringNullableFilter<"plants"> | string | null
   height?: Prisma.FloatNullableFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableFilter<"plants"> | number | null
-  droughtTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
-  floodTolerant?: Prisma.BoolNullableFilter<"plants"> | boolean | null
-  saltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  plantationDistance?: Prisma.FloatNullableFilter<"plants"> | number | null
+  groundSaltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  airSaltTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
+  soilHumidity?: Prisma.StringNullableFilter<"plants"> | string | null
+  soilRichness?: Prisma.StringNullableFilter<"plants"> | string | null
+  soilAcidity?: Prisma.StringNullableFilter<"plants"> | string | null
   sunTolerance?: Prisma.StringNullableFilter<"plants"> | string | null
   bloom?: Prisma.StringNullableFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableFilter<"plants"> | string | null
+  grouping?: Prisma.StringNullableFilter<"plants"> | string | null
   remarks?: Prisma.StringNullableFilter<"plants"> | string | null
   vascanID?: Prisma.StringNullableFilter<"plants"> | string | null
-  urlJardin2M?: Prisma.StringNullableFilter<"plants"> | string | null
+  hydroID?: Prisma.StringNullableFilter<"plants"> | string | null
+  referenceUrl?: Prisma.StringNullableFilter<"plants"> | string | null
 }, "id" | "code">
 
 export type plantsOrderByWithAggregationInput = {
@@ -440,15 +494,20 @@ export type plantsOrderByWithAggregationInput = {
   native?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   spread?: Prisma.SortOrderInput | Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrderInput | Prisma.SortOrder
-  saltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrderInput | Prisma.SortOrder
+  groundSaltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  airSaltTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
+  soilHumidity?: Prisma.SortOrderInput | Prisma.SortOrder
+  soilRichness?: Prisma.SortOrderInput | Prisma.SortOrder
+  soilAcidity?: Prisma.SortOrderInput | Prisma.SortOrder
   sunTolerance?: Prisma.SortOrderInput | Prisma.SortOrder
   bloom?: Prisma.SortOrderInput | Prisma.SortOrder
   functionalGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  grouping?: Prisma.SortOrderInput | Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   vascanID?: Prisma.SortOrderInput | Prisma.SortOrder
-  urlJardin2M?: Prisma.SortOrderInput | Prisma.SortOrder
+  hydroID?: Prisma.SortOrderInput | Prisma.SortOrder
+  referenceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.plantsCountOrderByAggregateInput
   _avg?: Prisma.plantsAvgOrderByAggregateInput
   _max?: Prisma.plantsMaxOrderByAggregateInput
@@ -474,15 +533,20 @@ export type plantsScalarWhereWithAggregatesInput = {
   native?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   height?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
   spread?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
-  droughtTolerant?: Prisma.BoolNullableWithAggregatesFilter<"plants"> | boolean | null
-  floodTolerant?: Prisma.BoolNullableWithAggregatesFilter<"plants"> | boolean | null
-  saltTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  plantationDistance?: Prisma.FloatNullableWithAggregatesFilter<"plants"> | number | null
+  groundSaltTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  airSaltTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  soilHumidity?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  soilRichness?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  soilAcidity?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   sunTolerance?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   bloom?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   functionalGroup?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  grouping?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   remarks?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
   vascanID?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
-  urlJardin2M?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  hydroID?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
+  referenceUrl?: Prisma.StringNullableWithAggregatesFilter<"plants"> | string | null
 }
 
 export type plantsCreateInput = {
@@ -499,15 +563,20 @@ export type plantsCreateInput = {
   native?: string | null
   height?: number | null
   spread?: number | null
-  droughtTolerant?: boolean | null
-  floodTolerant?: boolean | null
-  saltTolerance?: string | null
+  plantationDistance?: number | null
+  groundSaltTolerance?: string | null
+  airSaltTolerance?: string | null
+  soilHumidity?: string | null
+  soilRichness?: string | null
+  soilAcidity?: string | null
   sunTolerance?: string | null
   bloom?: string | null
   functionalGroup?: string | null
+  grouping?: string | null
   remarks?: string | null
   vascanID?: string | null
-  urlJardin2M?: string | null
+  hydroID?: string | null
+  referenceUrl?: string | null
 }
 
 export type plantsUncheckedCreateInput = {
@@ -525,15 +594,20 @@ export type plantsUncheckedCreateInput = {
   native?: string | null
   height?: number | null
   spread?: number | null
-  droughtTolerant?: boolean | null
-  floodTolerant?: boolean | null
-  saltTolerance?: string | null
+  plantationDistance?: number | null
+  groundSaltTolerance?: string | null
+  airSaltTolerance?: string | null
+  soilHumidity?: string | null
+  soilRichness?: string | null
+  soilAcidity?: string | null
   sunTolerance?: string | null
   bloom?: string | null
   functionalGroup?: string | null
+  grouping?: string | null
   remarks?: string | null
   vascanID?: string | null
-  urlJardin2M?: string | null
+  hydroID?: string | null
+  referenceUrl?: string | null
 }
 
 export type plantsUpdateInput = {
@@ -550,15 +624,20 @@ export type plantsUpdateInput = {
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  plantationDistance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  groundSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  airSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilHumidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilRichness?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilAcidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grouping?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hydroID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsUncheckedUpdateInput = {
@@ -576,15 +655,20 @@ export type plantsUncheckedUpdateInput = {
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  plantationDistance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  groundSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  airSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilHumidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilRichness?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilAcidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grouping?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hydroID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsCreateManyInput = {
@@ -602,15 +686,20 @@ export type plantsCreateManyInput = {
   native?: string | null
   height?: number | null
   spread?: number | null
-  droughtTolerant?: boolean | null
-  floodTolerant?: boolean | null
-  saltTolerance?: string | null
+  plantationDistance?: number | null
+  groundSaltTolerance?: string | null
+  airSaltTolerance?: string | null
+  soilHumidity?: string | null
+  soilRichness?: string | null
+  soilAcidity?: string | null
   sunTolerance?: string | null
   bloom?: string | null
   functionalGroup?: string | null
+  grouping?: string | null
   remarks?: string | null
   vascanID?: string | null
-  urlJardin2M?: string | null
+  hydroID?: string | null
+  referenceUrl?: string | null
 }
 
 export type plantsUpdateManyMutationInput = {
@@ -627,15 +716,20 @@ export type plantsUpdateManyMutationInput = {
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  plantationDistance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  groundSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  airSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilHumidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilRichness?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilAcidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grouping?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hydroID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsUncheckedUpdateManyInput = {
@@ -653,15 +747,20 @@ export type plantsUncheckedUpdateManyInput = {
   native?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   spread?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  droughtTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  floodTolerant?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  saltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  plantationDistance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  groundSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  airSaltTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilHumidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilRichness?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  soilAcidity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sunTolerance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bloom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   functionalGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grouping?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vascanID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  urlJardin2M?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hydroID?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type plantsCountOrderByAggregateInput = {
@@ -679,21 +778,27 @@ export type plantsCountOrderByAggregateInput = {
   native?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrder
-  saltTolerance?: Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrder
+  groundSaltTolerance?: Prisma.SortOrder
+  airSaltTolerance?: Prisma.SortOrder
+  soilHumidity?: Prisma.SortOrder
+  soilRichness?: Prisma.SortOrder
+  soilAcidity?: Prisma.SortOrder
   sunTolerance?: Prisma.SortOrder
   bloom?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
+  grouping?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   vascanID?: Prisma.SortOrder
-  urlJardin2M?: Prisma.SortOrder
+  hydroID?: Prisma.SortOrder
+  referenceUrl?: Prisma.SortOrder
 }
 
 export type plantsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrder
 }
 
 export type plantsMaxOrderByAggregateInput = {
@@ -711,15 +816,20 @@ export type plantsMaxOrderByAggregateInput = {
   native?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrder
-  saltTolerance?: Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrder
+  groundSaltTolerance?: Prisma.SortOrder
+  airSaltTolerance?: Prisma.SortOrder
+  soilHumidity?: Prisma.SortOrder
+  soilRichness?: Prisma.SortOrder
+  soilAcidity?: Prisma.SortOrder
   sunTolerance?: Prisma.SortOrder
   bloom?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
+  grouping?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   vascanID?: Prisma.SortOrder
-  urlJardin2M?: Prisma.SortOrder
+  hydroID?: Prisma.SortOrder
+  referenceUrl?: Prisma.SortOrder
 }
 
 export type plantsMinOrderByAggregateInput = {
@@ -737,21 +847,27 @@ export type plantsMinOrderByAggregateInput = {
   native?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
-  droughtTolerant?: Prisma.SortOrder
-  floodTolerant?: Prisma.SortOrder
-  saltTolerance?: Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrder
+  groundSaltTolerance?: Prisma.SortOrder
+  airSaltTolerance?: Prisma.SortOrder
+  soilHumidity?: Prisma.SortOrder
+  soilRichness?: Prisma.SortOrder
+  soilAcidity?: Prisma.SortOrder
   sunTolerance?: Prisma.SortOrder
   bloom?: Prisma.SortOrder
   functionalGroup?: Prisma.SortOrder
+  grouping?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   vascanID?: Prisma.SortOrder
-  urlJardin2M?: Prisma.SortOrder
+  hydroID?: Prisma.SortOrder
+  referenceUrl?: Prisma.SortOrder
 }
 
 export type plantsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   height?: Prisma.SortOrder
   spread?: Prisma.SortOrder
+  plantationDistance?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -768,10 +884,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type NullableBoolFieldUpdateOperationsInput = {
-  set?: boolean | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -799,15 +911,20 @@ export type plantsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   native?: boolean
   height?: boolean
   spread?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
-  saltTolerance?: boolean
+  plantationDistance?: boolean
+  groundSaltTolerance?: boolean
+  airSaltTolerance?: boolean
+  soilHumidity?: boolean
+  soilRichness?: boolean
+  soilAcidity?: boolean
   sunTolerance?: boolean
   bloom?: boolean
   functionalGroup?: boolean
+  grouping?: boolean
   remarks?: boolean
   vascanID?: boolean
-  urlJardin2M?: boolean
+  hydroID?: boolean
+  referenceUrl?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -825,15 +942,20 @@ export type plantsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   native?: boolean
   height?: boolean
   spread?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
-  saltTolerance?: boolean
+  plantationDistance?: boolean
+  groundSaltTolerance?: boolean
+  airSaltTolerance?: boolean
+  soilHumidity?: boolean
+  soilRichness?: boolean
+  soilAcidity?: boolean
   sunTolerance?: boolean
   bloom?: boolean
   functionalGroup?: boolean
+  grouping?: boolean
   remarks?: boolean
   vascanID?: boolean
-  urlJardin2M?: boolean
+  hydroID?: boolean
+  referenceUrl?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -851,15 +973,20 @@ export type plantsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   native?: boolean
   height?: boolean
   spread?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
-  saltTolerance?: boolean
+  plantationDistance?: boolean
+  groundSaltTolerance?: boolean
+  airSaltTolerance?: boolean
+  soilHumidity?: boolean
+  soilRichness?: boolean
+  soilAcidity?: boolean
   sunTolerance?: boolean
   bloom?: boolean
   functionalGroup?: boolean
+  grouping?: boolean
   remarks?: boolean
   vascanID?: boolean
-  urlJardin2M?: boolean
+  hydroID?: boolean
+  referenceUrl?: boolean
 }, ExtArgs["result"]["plants"]>
 
 export type plantsSelectScalar = {
@@ -877,18 +1004,23 @@ export type plantsSelectScalar = {
   native?: boolean
   height?: boolean
   spread?: boolean
-  droughtTolerant?: boolean
-  floodTolerant?: boolean
-  saltTolerance?: boolean
+  plantationDistance?: boolean
+  groundSaltTolerance?: boolean
+  airSaltTolerance?: boolean
+  soilHumidity?: boolean
+  soilRichness?: boolean
+  soilAcidity?: boolean
   sunTolerance?: boolean
   bloom?: boolean
   functionalGroup?: boolean
+  grouping?: boolean
   remarks?: boolean
   vascanID?: boolean
-  urlJardin2M?: boolean
+  hydroID?: boolean
+  referenceUrl?: boolean
 }
 
-export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "type" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "zone" | "native" | "height" | "spread" | "droughtTolerant" | "floodTolerant" | "saltTolerance" | "sunTolerance" | "bloom" | "functionalGroup" | "remarks" | "vascanID" | "urlJardin2M", ExtArgs["result"]["plants"]>
+export type plantsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "type" | "family" | "genus" | "species" | "cultivar" | "note" | "synonym" | "commonName" | "zone" | "native" | "height" | "spread" | "plantationDistance" | "groundSaltTolerance" | "airSaltTolerance" | "soilHumidity" | "soilRichness" | "soilAcidity" | "sunTolerance" | "bloom" | "functionalGroup" | "grouping" | "remarks" | "vascanID" | "hydroID" | "referenceUrl", ExtArgs["result"]["plants"]>
 
 export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "plants"
@@ -908,15 +1040,20 @@ export type $plantsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     native: string | null
     height: number | null
     spread: number | null
-    droughtTolerant: boolean | null
-    floodTolerant: boolean | null
-    saltTolerance: string | null
+    plantationDistance: number | null
+    groundSaltTolerance: string | null
+    airSaltTolerance: string | null
+    soilHumidity: string | null
+    soilRichness: string | null
+    soilAcidity: string | null
     sunTolerance: string | null
     bloom: string | null
     functionalGroup: string | null
+    grouping: string | null
     remarks: string | null
     vascanID: string | null
-    urlJardin2M: string | null
+    hydroID: string | null
+    referenceUrl: string | null
   }, ExtArgs["result"]["plants"]>
   composites: {}
 }
@@ -1354,15 +1491,20 @@ export interface plantsFieldRefs {
   readonly native: Prisma.FieldRef<"plants", 'String'>
   readonly height: Prisma.FieldRef<"plants", 'Float'>
   readonly spread: Prisma.FieldRef<"plants", 'Float'>
-  readonly droughtTolerant: Prisma.FieldRef<"plants", 'Boolean'>
-  readonly floodTolerant: Prisma.FieldRef<"plants", 'Boolean'>
-  readonly saltTolerance: Prisma.FieldRef<"plants", 'String'>
+  readonly plantationDistance: Prisma.FieldRef<"plants", 'Float'>
+  readonly groundSaltTolerance: Prisma.FieldRef<"plants", 'String'>
+  readonly airSaltTolerance: Prisma.FieldRef<"plants", 'String'>
+  readonly soilHumidity: Prisma.FieldRef<"plants", 'String'>
+  readonly soilRichness: Prisma.FieldRef<"plants", 'String'>
+  readonly soilAcidity: Prisma.FieldRef<"plants", 'String'>
   readonly sunTolerance: Prisma.FieldRef<"plants", 'String'>
   readonly bloom: Prisma.FieldRef<"plants", 'String'>
   readonly functionalGroup: Prisma.FieldRef<"plants", 'String'>
+  readonly grouping: Prisma.FieldRef<"plants", 'String'>
   readonly remarks: Prisma.FieldRef<"plants", 'String'>
   readonly vascanID: Prisma.FieldRef<"plants", 'String'>
-  readonly urlJardin2M: Prisma.FieldRef<"plants", 'String'>
+  readonly hydroID: Prisma.FieldRef<"plants", 'String'>
+  readonly referenceUrl: Prisma.FieldRef<"plants", 'String'>
 }
     
 
