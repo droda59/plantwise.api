@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import {
-    createItems,
     getItems,
     getItemByCode,
     createItem,
 } from '../controllers/plantController';
+import { createItems } from '../helpers/fileReader';
 
 const router = Router();
 
