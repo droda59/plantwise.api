@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse';
+import XLSX, { read } from 'xlsx';
 
 import db from '../database/dbConnection';
 import { FloatNullableFilter, plantsWhereInput } from '../database/prisma-client/models';
@@ -10,25 +11,61 @@ import { Plant } from '../models/plant';
 
 const toInt = (value: any) => parseInt(value as string, 10) / 100;
 
+const readCSV = (file: string) => {
+    return new Promise((resolve, reject) => {
+        const processFile = async () => {
+            const records = [];
+            const filePath = path.join(__dirname, file);
+            const parser = fs.createReadStream(filePath, 'utf8').pipe(
+                parse({
+                    columns: true,
+                    skip_records_with_empty_values: true,
+                    bom: true,
+                }),
+            );
+            for await (const record of parser) {
+                // Work with each record
+                records.push(record);
+            }
+            return records;
+        };
+
+        (async () => {
+            const records = await processFile();
+            resolve(records);
+        })();
+    });
+}
+
+const convertXlsxToCsv = (filename: string) => {
+    const workbook = XLSX.readFile(`src/data/${filename}.xlsx`, {
+        sheets: ["Liste plantes"],
+        password: 'aRD_PLNT'
+    });
+    const worksheet = workbook.Sheets["Liste plantes"];
+    const stream = XLSX.stream.to_csv(worksheet);
+    stream.pipe(fs.createWriteStream(`src/data/${filename}.csv`));
+};
+
+const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
+
 const createItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const sanitizePlants = (rows: any[]) => {
             // Attendu: colonnes similaires à exportRows ci-dessus. Les champs non conformes seront ignorés.
             const toPlant = (r: any) => {
-                const cleanup = (x: any) => typeof x === 'string' ? x.trim() : x;
-
-                const fullSun = cleanup(r['Ensoleillement plein soleil']).length > 0;
-                const sunShade = cleanup(r['Ensoleillement soleil-mi-ombre']).length > 0;
-                const partialShade = cleanup(r['Ensoleillement mi-ombre']).length > 0;
-                const shade = cleanup(r['Ensoleillement ombre']).length > 0;
+                const code = cleanup(r['Code']);
+                if (!code || !code.length) {
+                    return undefined;
+                }
 
                 const suns: ('full' | 'partial' | 'shade')[] = [];
-                if (fullSun || sunShade) suns.push('full');
-                if (sunShade || partialShade) suns.push('partial');
-                if (partialShade || shade) suns.push('shade');
+                if (cleanup(r['soleil']).length > 0) suns.push('full');
+                if (cleanup(r['mi-ombre']).length > 0) suns.push('partial');
+                if (cleanup(r['ombre']).length > 0) suns.push('shade');
 
                 const p: Plant = {
-                    code: cleanup(r['CODE']),
+                    code,
                     type: cleanup(r['Type']) || '',
 
                     family: cleanup(r['Famille']),
@@ -39,54 +76,33 @@ const createItems = async (req: Request, res: Response, next: NextFunction) => {
                     synonym: cleanup(r['Synonyme']),
                     commonName: cleanup(r['Nom vernaculaire']),
 
+                    height: Number(cleanup(r['Hauteur'])) || undefined,
+                    spread: Number(cleanup(r['Largeur'])) || undefined,
+
                     zone: cleanup(r['Zone']) || undefined,
-                    native: cleanup(r['indig/nat']),
-                    height: Number(cleanup(r['H'])) || undefined, //Number(r.height),
-                    spread: Number(cleanup(r['L'])) || undefined,
+                    native: cleanup(r['indigène']),
                     sunTolerance: suns.join(','),
-                    bloom: cleanup(r['Flor']) || undefined,
+                    bloom: cleanup(r['Floraison']) || undefined,
                     functionalGroup: cleanup(r['Groupe fonctionnel']),
 
                     remarks: cleanup(r['Remarques']),
 
                     vascanID: cleanup(r['ID vascan']),
-                    urlJardin2M: cleanup(r['Lien J2M']),
+                    urlJardin2M: cleanup(r['Lien pépinière']),
                 };
                 return p;
             };
 
-            return rows.map(toPlant);
-        }
-
-        const readCSV = (file: string) => {
-            return new Promise((resolve, reject) => {
-                const processFile = async () => {
-                    const records = [];
-                    const filePath = path.join(__dirname, file);
-                    const parser = fs.createReadStream(filePath, 'utf8').pipe(
-                        parse({
-                            columns: true,
-                            skip_records_with_empty_values: true,
-                            bom: true,
-                        }),
-                    );
-                    for await (const record of parser) {
-                        // Work with each record
-                        records.push(record);
-                    }
-                    return records;
-                };
-
-                (async () => {
-                    const records = await processFile();
-                    resolve(records);
-                })();
-            });
+            return rows.map(toPlant).filter(r => !!r) as Plant[];
         }
 
         await db.plants.deleteMany();
-        const fileData = await readCSV('../data/Plantation - liste globale.csv');
+
+        const fileName = 'Plantation - liste globale_aRD';
+        convertXlsxToCsv(fileName);
+        const fileData = await readCSV(`../data/${fileName}.csv`);
         const newRows = sanitizePlants(fileData as any[]);
+        console.log('newRows', newRows.filter(r => !r.code));
 
         const rows = newRows.map(p => ({
             code: p.code,
