@@ -59,7 +59,7 @@ const toPlant = (r: any) => {
 
     const soilHumidity = [];
     if (cleanup(r['Sol sec']).length > 0) soilHumidity.push('dry');
-    if (cleanup(r['Sol normal']).length > 0) soilHumidity.push('regular');
+    if (cleanup(r['Sol frais']).length > 0) soilHumidity.push('regular');
     if (cleanup(r['Sol humide']).length > 0) soilHumidity.push('wet');
 
     const soilRichness = [];

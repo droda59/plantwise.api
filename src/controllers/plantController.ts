@@ -46,6 +46,17 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 { airSaltTolerance: { equals: 'bonne' } },
             ]
         }
+        var humidityConditions: plantsWhereInput = {};
+        if (req.query.drought && req.query.flood) {
+            humidityConditions.AND = [
+                { soilHumidity: { contains: 'dry' } },
+                { soilHumidity: { contains: 'wet' } },
+            ]
+        } else if (req.query.drought) {
+            humidityConditions = { soilHumidity: { contains: 'dry' } };
+        } else if (req.query.flood) {
+            humidityConditions = { soilHumidity: { contains: 'wet' } };
+        }
         if (req.query.bloom) conditions.bloom = { contains: String(req.query.bloom) };
 
         const heightConditions = {} as FloatNullableFilter<never>;
@@ -70,6 +81,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 sunConditions,
                 groundSaltConditions,
                 airSaltConditions,
+                humidityConditions,
                 conditions,
             ]
         };
