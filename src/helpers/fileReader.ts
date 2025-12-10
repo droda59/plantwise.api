@@ -17,6 +17,7 @@ const readCSV = (file: string) => {
                     columns: true,
                     skip_records_with_empty_values: true,
                     bom: true,
+                    fromLine: 2,
                 }),
             );
             for await (const record of parser) {
@@ -57,9 +58,9 @@ const toPlant = (r: any) => {
     if (cleanup(r['ombre']).length > 0) suns.push('shade');
 
     const soilHumidity = [];
-    if (cleanup(r['sec']).length > 0) soilHumidity.push('dry');
-    if (cleanup(r['normal']).length > 0) soilHumidity.push('regular');
-    if (cleanup(r['humide']).length > 0) soilHumidity.push('wet');
+    if (cleanup(r['Sol sec']).length > 0) soilHumidity.push('dry');
+    if (cleanup(r['Sol normal']).length > 0) soilHumidity.push('regular');
+    if (cleanup(r['Sol humide']).length > 0) soilHumidity.push('wet');
 
     const soilRichness = [];
     if (cleanup(r['Sol pauvre']).length > 0) soilRichness.push('poor');
@@ -93,8 +94,8 @@ const toPlant = (r: any) => {
         soilHumidity: soilHumidity.join(','),
         soilRichness: soilRichness.join(','),
         soilStructure: soilStructure.join(','),
-        groundSaltTolerance: cleanup(r['Sels déglaçage']),
-        airSaltTolerance: cleanup(r['Embruns salins']),
+        groundSaltTolerance: cleanup(r['Tolérance sels déglaçage']),
+        airSaltTolerance: cleanup(r['Tolérance embruns salins']),
         soilAcidity: cleanup(r['Acidité du sol']),
 
         bloom: cleanup(r['Floraison']),

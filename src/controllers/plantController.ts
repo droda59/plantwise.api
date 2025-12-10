@@ -24,13 +24,27 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         const conditions: plantsWhereInput = {};
         if (req.query.type) conditions.type = String(req.query.type);
         if (req.query.zone) conditions.zone = { in: getZoneFilter(String(req.query.zone)) };
-        if (req.query.native) conditions.native = 'i';
+        if (req.query.native) conditions.native = 'x';
 
         const sunConditions: plantsWhereInput = {};
         if (req.query.sun) {
             sunConditions.OR = String(req.query.sun).split(',').map(c => (
                 { sunTolerance: { contains: c } }
             ));
+        }
+        const groundSaltConditions: plantsWhereInput = {};
+        if (req.query.groundSalt) {
+            groundSaltConditions.OR = [
+                { groundSaltTolerance: { equals: 'moyenne' } },
+                { groundSaltTolerance: { equals: 'bonne' } },
+            ]
+        }
+        const airSaltConditions: plantsWhereInput = {};
+        if (req.query.airSalt) {
+            airSaltConditions.OR = [
+                { airSaltTolerance: { equals: 'moyenne' } },
+                { airSaltTolerance: { equals: 'bonne' } },
+            ]
         }
         if (req.query.bloom) conditions.bloom = { contains: String(req.query.bloom) };
 
@@ -54,6 +68,8 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             AND: [
                 textConditions,
                 sunConditions,
+                groundSaltConditions,
+                airSaltConditions,
                 conditions,
             ]
         };
@@ -75,7 +91,6 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 spread: true,
                 sunTolerance: true,
                 functionalGroup: true,
-                grouping: true,
             },
             where: allConditions,
             orderBy: {
