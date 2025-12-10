@@ -89,7 +89,7 @@ const toPlant = (r: any) => {
         plantationDistance: Number(cleanup(r['Distance de plantation HQ'])) || undefined,
 
         zone: cleanup(r['Zone']) || undefined,
-        native: cleanup(r['indigène']),
+        native: cleanup(r['Indigène']),
         sunTolerance: suns.join(','),
         soilHumidity: soilHumidity.join(','),
         soilRichness: soilRichness.join(','),
