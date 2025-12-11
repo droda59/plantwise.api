@@ -70,7 +70,12 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
         conditions.spread = spreadConditions;
 
         if (req.query.functionalGroup) conditions.functionalGroup = String(req.query.functionalGroup);
-        if (req.query.grouping) conditions.grouping = String(req.query.grouping);
+        const groupingConditions: plantsWhereInput = {};
+        if (req.query.grouping) {
+            groupingConditions.AND = String(req.query.grouping).split(',').map(c => (
+                { grouping: { contains: c } }
+            ));
+        }
 
         if (req.query.genus) conditions.genus = String(req.query.genus);
         if (req.query.species) conditions.species = String(req.query.species);
@@ -82,6 +87,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 groundSaltConditions,
                 airSaltConditions,
                 humidityConditions,
+                groupingConditions,
                 conditions,
             ]
         };
