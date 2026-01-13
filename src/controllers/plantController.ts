@@ -97,6 +97,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 type: true,
 
                 genus: true,
+                family: true,
                 species: true,
                 cultivar: true,
                 note: true,
