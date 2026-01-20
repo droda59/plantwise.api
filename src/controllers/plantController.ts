@@ -18,6 +18,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 { note: { contains: searchQuery } },
                 { synonym: { contains: searchQuery } },
                 { commonName: { contains: searchQuery } },
+                { remarks: { contains: searchQuery } },
             ];
         }
 
