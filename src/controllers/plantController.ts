@@ -110,6 +110,7 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
                 spread: true,
                 sunTolerance: true,
                 functionalGroup: true,
+                grouping: true,
             },
             where: allConditions,
             orderBy: {
