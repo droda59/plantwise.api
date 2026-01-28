@@ -78,8 +78,17 @@ const getItems = async (req: Request, res: Response, next: NextFunction) => {
             ));
         }
 
-        if (req.query.genus) conditions.genus = String(req.query.genus);
-        if (req.query.species) conditions.species = String(req.query.species);
+        if (req.query.genus && req.query.species === 'unknown') {
+            conditions.AND = [
+                {
+                    genus: String(req.query.genus),
+                    species: ''
+                },
+            ];
+        } else {
+            if (req.query.genus) conditions.genus = String(req.query.genus);
+            if (req.query.species) conditions.species = String(req.query.species);
+        }
 
         const allConditions: plantsWhereInput = {
             AND: [
